@@ -1,0 +1,1825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🇬🇧 UK Guide Agency – 4t ESO</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#080c14;--surface:#0f1623;--s2:#161e2e;--s3:#1d2540;--border:#2a3550;
+  --text:#e8edf5;--muted:#7a8baa;--ok:#22c55e;--err:#ef4444;--r:10px;
+  --accent:#4A9EFF;--accent-bg:rgba(74,158,255,.06);--accent-border:rgba(74,158,255,.22);
+  --gold:#F5C842;--ps-col:#22c55e;--comm-col:#F5C842;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;font-size:15px}
+
+/* ── ONBOARDING ── */
+#onboarding{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:2rem;
+  background:radial-gradient(ellipse at 20% 60%,rgba(74,158,255,.1) 0%,transparent 55%),
+             radial-gradient(ellipse at 80% 20%,rgba(245,200,66,.08) 0%,transparent 55%),var(--bg)}
+.ob-card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:2.75rem 2.5rem;width:100%;max-width:520px;text-align:center}
+.ob-dots{display:flex;justify-content:center;gap:.5rem;margin-bottom:2rem}
+.ob-dot{width:8px;height:8px;border-radius:50%;background:var(--border);transition:all .3s}
+.ob-dot.active{background:var(--accent);width:24px;border-radius:4px}
+.ob-slide{display:none}.ob-slide.active{display:block}
+.ob-emoji{font-size:3.5rem;margin-bottom:1rem;display:block}
+.ob-title{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;letter-spacing:.04em;
+  background:linear-gradient(135deg,var(--accent),var(--gold));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:.75rem}
+.ob-text{color:var(--muted);font-size:.9rem;line-height:1.75;margin-bottom:1.5rem}
+.ob-text b{color:var(--text)}
+.ob-missions{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:1.5rem;text-align:left}
+.ob-mission{background:var(--s2);border:1px solid var(--border);border-radius:8px;padding:.6rem .85rem;font-size:.8rem}
+.ob-mission .mn{font-weight:700;color:var(--text);font-size:.75rem}
+.ob-mission .md{color:var(--muted);font-size:.72rem}
+.ob-ranks{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1.5rem}
+.ob-rank{display:flex;align-items:center;gap:.75rem;background:var(--s2);border:1px solid var(--border);border-radius:8px;padding:.5rem .85rem;text-align:left}
+.ob-rank .ri{font-size:1.3rem;width:30px;text-align:center}
+.ob-rank .rn{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:.05em;color:var(--gold)}
+.ob-rank .rx{font-size:.72rem;color:var(--muted)}
+.ob-skills{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1.5rem;text-align:left}
+.ob-skill{display:flex;align-items:center;gap:.75rem;background:var(--s2);border:1px solid var(--border);border-radius:8px;padding:.5rem .85rem}
+.ob-skill .sk{font-size:1.1rem;width:24px;text-align:center}
+.ob-skill .sn{font-weight:700;font-size:.8rem}
+.ob-skill .sd{font-size:.72rem;color:var(--muted)}
+.ob-nav{display:flex;gap:.75rem;justify-content:center}
+.btn-ob-prev{background:var(--s2);border:1px solid var(--border);border-radius:8px;color:var(--muted);padding:.65rem 1.25rem;font-family:'DM Sans',sans-serif;font-size:.85rem;cursor:pointer;transition:border-color .15s}
+.btn-ob-prev:hover{border-color:var(--accent)}
+.btn-ob-next{background:linear-gradient(135deg,var(--accent),#2563eb);color:#fff;border:none;border-radius:8px;padding:.65rem 1.6rem;font-family:'Bebas Neue',sans-serif;font-size:1.05rem;letter-spacing:.07em;cursor:pointer;transition:transform .15s}
+.btn-ob-next:hover{transform:translateY(-1px)}
+.btn-ob-start{background:linear-gradient(135deg,var(--gold),#e8a800);color:#000;border:none;border-radius:10px;padding:.8rem 2rem;font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:.08em;cursor:pointer;transition:transform .15s,box-shadow .15s}
+.btn-ob-start:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(245,200,66,.35)}
+.ob-skip{background:none;border:none;color:var(--muted);font-size:.75rem;cursor:pointer;margin-top:1rem;display:block;width:100%;text-align:center;text-decoration:underline}
+
+/* ── LOGIN ── */
+#login{min-height:100vh;display:none;align-items:center;justify-content:center;padding:2rem;
+  background:radial-gradient(ellipse at 20% 55%,rgba(74,158,255,.09) 0%,transparent 55%),
+             radial-gradient(ellipse at 80% 20%,rgba(245,200,66,.07) 0%,transparent 55%),var(--bg)}
+.lcard{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:2.5rem;width:100%;max-width:460px;text-align:center}
+.lflag{font-size:2.5rem;margin-bottom:.4rem;display:block}
+.llogo{font-family:'Bebas Neue',sans-serif;font-size:2.8rem;letter-spacing:.05em;
+  background:linear-gradient(135deg,var(--accent),var(--gold));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
+.lsub{color:var(--muted);font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;margin-bottom:2rem;margin-top:.3rem}
+.field{margin-bottom:1rem;text-align:left}
+.field label{display:block;font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:.4rem;font-weight:600}
+.field input,.field select{width:100%;background:var(--s2);border:1px solid var(--border);border-radius:8px;padding:.7rem .95rem;color:var(--text);font-family:'DM Sans',sans-serif;font-size:.95rem;transition:border-color .2s}
+.field input:focus,.field select:focus{outline:none;border-color:var(--accent)}
+.field select option{background:var(--s2)}
+.email-warn{display:none;background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.35);border-radius:8px;padding:.6rem .9rem;font-size:.8rem;color:#fbbf24;margin-top:.5rem;line-height:1.5;text-align:left}
+.btn-start{width:100%;background:linear-gradient(135deg,var(--gold),#e8a800);color:#000;border:none;border-radius:10px;padding:.9rem;font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:.08em;cursor:pointer;margin-top:.5rem;transition:transform .15s,box-shadow .15s}
+.btn-start:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(245,200,66,.3)}
+.login-loading{display:none;text-align:center;color:var(--muted);font-size:.85rem;margin-top:.75rem}
+
+/* ── RESUME ── */
+#resume{min-height:100vh;display:none;align-items:center;justify-content:center;padding:2rem;
+  background:radial-gradient(ellipse at 30% 50%,rgba(74,158,255,.09) 0%,transparent 55%),var(--bg)}
+.res-card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:2.5rem;width:100%;max-width:500px;text-align:center}
+.res-title{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:.04em;color:var(--gold);margin-bottom:.35rem}
+.res-sub{color:var(--muted);font-size:.85rem;margin-bottom:1.5rem}
+.res-missions{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1.5rem;text-align:left}
+.res-mission{display:flex;align-items:center;gap:.75rem;padding:.55rem .9rem;border-radius:8px;border:1px solid var(--border);background:var(--s2);font-size:.83rem}
+.res-mission.done{border-color:rgba(34,197,94,.35);background:rgba(34,197,94,.07)}
+.res-mission .rm-icon{font-size:1.1rem;width:20px;text-align:center}
+.res-mission .rm-name{flex:1;font-weight:600}
+.res-mission .rm-xp{font-size:.75rem;font-weight:700;color:var(--ok)}
+.btn-resume{width:100%;background:linear-gradient(135deg,var(--gold),#e8a800);color:#000;border:none;border-radius:10px;padding:.85rem;font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:.08em;cursor:pointer;transition:transform .15s}
+.btn-resume:hover{transform:translateY(-2px)}
+
+/* ── APP SHELL ── */
+#app{display:none;min-height:100vh;flex-direction:column}
+.topbar{background:var(--surface);border-bottom:1px solid var(--border);padding:.6rem 1.5rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;gap:1rem}
+.topbar-logo{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:.05em;
+  background:linear-gradient(135deg,var(--accent),var(--gold));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;white-space:nowrap}
+.topbar-right{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap}
+.chip{background:var(--s2);border:1px solid var(--border);border-radius:100px;padding:.28rem .85rem;font-size:.78rem;color:var(--muted);white-space:nowrap}
+.chip b{color:var(--text)}
+.xp-chip{background:var(--s2);border:1px solid rgba(245,200,66,.3);border-radius:100px;padding:.28rem 1rem;display:flex;align-items:center;gap:.5rem;white-space:nowrap}
+.xp-chip .xri{font-size:.95rem}.xp-chip .xrl{font-size:.75rem;font-weight:700;color:var(--gold)}
+.xp-chip .xrv{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:.05em}
+.xp-chip .xru{font-size:.7rem;color:var(--muted)}
+.app-body{display:flex;flex:1}
+
+/* ── SIDEBAR ── */
+.sidebar{width:220px;min-height:calc(100vh - 51px);background:var(--surface);border-right:1px solid var(--border);padding:1.1rem .85rem;position:sticky;top:51px;height:calc(100vh - 51px);overflow-y:auto;flex-shrink:0}
+.sb-label{font-size:.68rem;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);margin-bottom:.6rem;padding:0 .4rem;font-weight:600}
+.stab{display:flex;align-items:center;gap:.6rem;padding:.6rem .6rem;border-radius:8px;cursor:pointer;transition:background .15s;margin-bottom:.2rem;border:1px solid transparent}
+.stab:hover:not(.locked){background:var(--s2)}
+.stab.active{background:var(--accent-bg);border-color:var(--accent-border)}
+.stab.locked{opacity:.45;cursor:not-allowed}
+.stab.done .tab-icon{color:var(--ok)}
+.tab-icon{font-size:1.05rem;width:20px;text-align:center;flex-shrink:0}
+.tab-info{flex:1;min-width:0}
+.tab-name{font-size:.74rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.stab.active .tab-name{color:var(--gold)}
+.tab-num{font-size:.63rem;color:var(--muted)}
+.tab-xp{font-size:.68rem;font-weight:700;color:var(--ok);white-space:nowrap}
+.sb-divider{height:1px;background:var(--border);margin:.75rem 0}
+/* XP block */
+.sb-xp-block{padding:.85rem;background:var(--s2);border:1px solid var(--border);border-radius:10px;margin-top:.5rem}
+.sb-rank-row{display:flex;align-items:center;gap:.5rem;margin-bottom:.6rem}
+.sb-rank-ico{font-size:1.4rem}.sb-rank-name{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:.05em;color:var(--gold)}
+.sb-xp-count{font-size:.75rem;color:var(--muted);margin-bottom:.35rem}
+.sb-xp-count b{color:var(--text)}
+.xp-bar-wrap{background:var(--s3);border-radius:100px;height:6px;overflow:hidden;margin-bottom:.4rem}
+.xp-bar-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--gold));border-radius:100px;transition:width .8s cubic-bezier(.34,1.56,.64,1);width:0%}
+.sb-next-rank{font-size:.65rem;color:var(--muted);margin-bottom:.65rem}
+/* Skills mini in sidebar */
+.sb-skills{display:flex;flex-direction:column;gap:.3rem}
+.sb-skill-row{display:flex;align-items:center;justify-content:space-between;font-size:.72rem}
+.sb-skill-name{color:var(--muted)}
+.sb-skill-val{font-weight:700}
+.sv-lang{color:var(--accent)}.sv-ps{color:var(--ps-col)}.sv-comm{color:var(--gold)}
+
+/* ── CONTENT ── */
+.content{flex:1;padding:1.75rem 2rem;max-width:850px;min-width:0}
+.session-wrap{display:none}.session-wrap.active{display:block}
+
+/* ── BOSS MESSAGE ── */
+.boss-card{display:flex;align-items:flex-start;gap:1rem;background:rgba(74,158,255,.05);border:1px solid rgba(74,158,255,.2);border-radius:12px;padding:1.1rem 1.25rem;margin-bottom:1.5rem}
+.boss-avatar{font-size:2.2rem;flex-shrink:0}
+.boss-content{}
+.boss-label{font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;color:var(--accent);font-weight:700;margin-bottom:.3rem}
+.boss-text{font-size:.87rem;color:#ccd6ea;line-height:1.7}
+.boss-text b{color:var(--gold)}
+
+/* ── MISSION BANNER ── */
+.mission-banner{border-radius:14px;overflow:hidden;margin-bottom:1.5rem;background:var(--accent-bg);border:1px solid var(--accent-border)}
+.mission-img{width:100%;height:180px;object-fit:cover;display:block;opacity:.85}
+.mission-intro{padding:1.15rem 1.35rem}
+.snum{font-size:.72rem;text-transform:uppercase;letter-spacing:.15em;color:var(--accent);font-weight:700;margin-bottom:.2rem}
+.stitle{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;letter-spacing:.03em;line-height:1;margin-bottom:.5rem}
+.sdesc{color:var(--muted);font-size:.88rem;line-height:1.65}
+
+/* ── THEORY ── */
+.theory-box{background:var(--accent-bg);border:1px solid var(--accent-border);border-radius:var(--r);margin-bottom:1.25rem;overflow:hidden}
+.th-hdr{display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.1rem;cursor:pointer;user-select:none}
+.th-hdr-l{display:flex;align-items:center;gap:.6rem;font-weight:700;color:var(--accent);font-size:.9rem}
+.th-chevron{color:var(--accent);font-size:.75rem;transition:transform .25s}
+.theory-box.open .th-chevron{transform:rotate(180deg)}
+.th-body{display:none;padding:0 1.25rem 1.25rem;border-top:1px solid var(--accent-border)}
+.theory-box.open .th-body{display:block}
+.th-body h3{font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;color:var(--gold);margin:1rem 0 .45rem;font-weight:700}
+.th-body h4{font-size:.85rem;color:var(--accent);margin:.8rem 0 .3rem;font-weight:700}
+.th-body p{color:#bdc8dc;font-size:.875rem;line-height:1.8;margin-bottom:.6rem}
+.th-body ul{color:#bdc8dc;font-size:.875rem;line-height:1.8;padding-left:1.2rem;margin-bottom:.6rem}
+.th-body ul li{margin-bottom:.2rem}
+.th-body strong{color:var(--text)}
+.th-table{width:100%;border-collapse:collapse;font-size:.83rem;margin:.6rem 0}
+.th-table th{background:rgba(255,255,255,.06);color:var(--accent);padding:.5rem .8rem;text-align:left;font-size:.73rem;text-transform:uppercase;letter-spacing:.07em}
+.th-table td{padding:.48rem .8rem;border-bottom:1px solid var(--border);color:#bdc8dc}
+.th-table tr:last-child td{border-bottom:none}
+.th-table td:first-child{color:var(--text);font-weight:600}
+.ex-box{background:var(--s2);border-left:3px solid var(--gold);border-radius:0 6px 6px 0;padding:.6rem 1rem;margin:.4rem 0;font-size:.85rem;color:#dde6f5;line-height:1.7}
+.err-box{background:rgba(239,68,68,.08);border-left:3px solid var(--err);border-radius:0 6px 6px 0;padding:.6rem 1rem;margin:.4rem 0;font-size:.85rem;color:#fca5a5;line-height:1.7}
+.note-box{background:rgba(245,200,66,.07);border:1px solid rgba(245,200,66,.2);border-radius:8px;padding:.7rem 1rem;margin:.6rem 0;font-size:.83rem;color:#e8d87a;line-height:1.6}
+.music-box{background:rgba(168,85,247,.07);border:1px solid rgba(168,85,247,.25);border-radius:10px;padding:.9rem 1rem;margin:.85rem 0;font-size:.84rem;color:#d8b4fe;display:flex;flex-direction:column;gap:.75rem;line-height:1.65}
+.music-box b{color:#e9d5ff}
+.yt-card{display:flex;align-items:center;gap:1rem;background:#0f0f0f;border:1px solid #333;border-radius:10px;padding:.85rem 1.1rem;text-decoration:none;transition:border-color .2s,background .2s;cursor:pointer}
+.yt-card:hover{border-color:#ff0000;background:#1a0000}
+.yt-card .yt-play{font-size:2rem;flex-shrink:0;background:#ff0000;border-radius:6px;width:44px;height:36px;display:flex;align-items:center;justify-content:center;font-size:1.1rem}
+.yt-card .yt-info{flex:1;min-width:0}
+.yt-card .yt-label{font-size:.66rem;text-transform:uppercase;letter-spacing:.12em;color:#aaa;margin-bottom:.2rem}
+.yt-card .yt-title{font-size:.88rem;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.yt-card .yt-sub{font-size:.74rem;color:#888;margin-top:.1rem}
+.yt-cards{display:flex;flex-direction:column;gap:.5rem}
+.kw-grid{display:grid;grid-template-columns:1fr 1fr;gap:.4rem .85rem;margin:.45rem 0}
+.kw-item{font-size:.82rem;color:#bdc8dc}
+.kw-item b{color:var(--gold)}
+.sig-words{display:flex;flex-wrap:wrap;gap:.4rem;margin:.45rem 0}
+.sw{background:rgba(245,200,66,.1);border:1px solid rgba(245,200,66,.25);border-radius:100px;padding:.18rem .65rem;font-size:.77rem;color:var(--gold);font-style:italic}
+
+/* ── EXERCISES ── */
+.quick-ref{background:rgba(245,200,66,.07);border:1px solid rgba(245,200,66,.2);border-radius:7px;padding:.55rem .9rem;margin-bottom:.75rem;font-size:.8rem;color:#e8d87a;line-height:1.5}
+.quick-ref b{color:var(--gold)}
+.hint-box{background:rgba(74,158,255,.07);border:1px solid rgba(74,158,255,.2);border-radius:7px;padding:.5rem .85rem;margin-bottom:.7rem;font-size:.79rem;color:#93c5fd;line-height:1.5;display:none}
+.hint-box.show{display:block}
+.hint-toggle{background:none;border:1px solid rgba(74,158,255,.3);border-radius:6px;color:var(--accent);font-size:.75rem;padding:.2rem .7rem;cursor:pointer;margin-bottom:.7rem;transition:background .15s}
+.hint-toggle:hover{background:rgba(74,158,255,.1)}
+.exblock{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);margin-bottom:1.1rem;overflow:hidden;transition:border-color .3s}
+.exblock.ex-done{border-color:rgba(34,197,94,.3)}
+.exblock.bonus-ex{border-style:dashed;border-color:rgba(245,200,66,.3)}
+.ex-hdr{padding:.8rem 1.1rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.65rem;flex-wrap:wrap}
+.ex-badge{color:#fff;font-family:'Bebas Neue',sans-serif;font-size:.78rem;letter-spacing:.1em;padding:.18rem .55rem;border-radius:4px;flex-shrink:0}
+.ex-title{font-weight:700;font-size:.9rem}
+.skill-tag{font-size:.7rem;font-weight:700;padding:.15rem .55rem;border-radius:100px;white-space:nowrap}
+.sk-lang{background:rgba(74,158,255,.15);color:var(--accent);border:1px solid rgba(74,158,255,.3)}
+.sk-ps{background:rgba(34,197,94,.12);color:var(--ps-col);border:1px solid rgba(34,197,94,.3)}
+.sk-comm{background:rgba(245,200,66,.12);color:var(--gold);border:1px solid rgba(245,200,66,.3)}
+.ex-xp{margin-left:auto;font-size:.72rem;font-weight:700;color:var(--gold);background:rgba(245,200,66,.1);border:1px solid rgba(245,200,66,.2);padding:.18rem .6rem;border-radius:100px;white-space:nowrap}
+.ex-teacher{margin-left:auto;font-size:.72rem;color:var(--muted);background:var(--s3);padding:.18rem .6rem;border-radius:100px;white-space:nowrap}
+.bonus-label{margin-left:auto;font-size:.7rem;color:var(--gold);font-weight:700;background:rgba(245,200,66,.08);border:1px solid rgba(245,200,66,.2);padding:.18rem .6rem;border-radius:100px}
+.ex-body{padding:1.1rem}
+.ex-instr{font-size:.83rem;color:var(--muted);margin-bottom:.9rem;font-style:italic;line-height:1.5}
+.qitem{margin-bottom:.9rem;padding-bottom:.9rem;border-bottom:1px solid var(--border)}
+.qitem:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.qtxt{font-size:.875rem;margin-bottom:.55rem;line-height:1.6}
+.qtxt strong{color:var(--gold)}
+.opts{display:flex;flex-direction:column;gap:.35rem}
+.opt{display:flex;align-items:center;gap:.55rem;padding:.45rem .7rem;border-radius:6px;border:1px solid var(--border);cursor:pointer;transition:background .15s,border-color .15s;font-size:.84rem}
+.opt:hover{background:var(--s2);border-color:var(--muted)}
+.opt input[type=radio]{accent-color:var(--gold);flex-shrink:0}
+.opt.c-ans{background:rgba(34,197,94,.12);border-color:var(--ok)!important}
+.opt.w-ans{background:rgba(239,68,68,.1);border-color:var(--err)!important}
+.ans-sel,.ans-inp{background:var(--s3);border:1px solid var(--border);border-radius:6px;padding:.45rem .7rem;color:var(--text);font-family:'DM Sans',sans-serif;font-size:.84rem;transition:border-color .2s}
+.ans-sel:focus,.ans-inp:focus{outline:none;border-color:var(--gold)}
+.ans-sel.ok,.ans-inp.ok{border-color:var(--ok);background:rgba(34,197,94,.09)}
+.ans-sel.ko,.ans-inp.ko{border-color:var(--err);background:rgba(239,68,68,.08)}
+.ans-sel option{background:var(--s3)}
+.ans-inp{width:200px}
+.fsent{font-size:.88rem;line-height:2.8;display:flex;flex-wrap:wrap;align-items:center;gap:.25rem}
+.tf-row{display:flex;align-items:center;gap:.85rem;margin-top:.4rem;flex-wrap:wrap}
+.tf-btn{padding:.38rem 1.1rem;border-radius:6px;border:1px solid var(--border);background:var(--s3);color:var(--text);font-family:'DM Sans',sans-serif;font-size:.83rem;font-weight:600;cursor:pointer;transition:all .15s}
+.tf-btn:hover{border-color:var(--gold)}
+.tf-btn.sel-t{background:rgba(34,197,94,.15);border-color:var(--ok);color:var(--ok)}
+.tf-btn.sel-f{background:rgba(239,68,68,.12);border-color:var(--err);color:var(--err)}
+.tf-btn.rev-ok{background:rgba(34,197,94,.18);border-color:var(--ok)}
+.tf-btn.rev-ko{background:rgba(239,68,68,.15);border-color:var(--err)}
+.open-inp{width:100%;background:var(--s3);border:1px solid var(--border);border-radius:7px;padding:.55rem .8rem;color:var(--text);font-family:'DM Sans',sans-serif;font-size:.85rem;resize:vertical;min-height:58px;line-height:1.55}
+.open-inp:focus{outline:none;border-color:var(--gold)}
+.writing-area{width:100%;min-height:185px;background:var(--s3);border:1px solid var(--border);border-radius:8px;padding:.8rem 1rem;color:var(--text);font-family:'DM Sans',sans-serif;font-size:.9rem;line-height:1.7;resize:vertical}
+.writing-area:focus{outline:none;border-color:var(--gold)}
+.checklist{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:.65rem}
+.ck-item{background:var(--s3);border:1px solid var(--border);border-radius:100px;padding:.25rem .75rem;font-size:.76rem;color:var(--muted)}
+.wbank{display:flex;flex-wrap:wrap;gap:.45rem;margin-bottom:.9rem;padding:.65rem .85rem;background:var(--s3);border-radius:8px;border:1px dashed var(--border)}
+.wchip{background:var(--surface);border:1px solid var(--border);border-radius:100px;padding:.2rem .65rem;font-size:.78rem;color:var(--gold);font-style:italic}
+.fb{display:inline-flex;align-items:center;font-size:.73rem;padding:.12rem .45rem;border-radius:4px;margin-left:.4rem;font-weight:600;vertical-align:middle}
+.fb.ok{background:rgba(34,197,94,.18);color:var(--ok)}
+.fb.ko{background:rgba(239,68,68,.15);color:var(--err)}
+.fb.teach{background:rgba(245,200,66,.12);color:var(--gold)}
+.correct-hint{font-size:.77rem;color:var(--ok);margin-top:.25rem}
+.match-table{width:100%;border-collapse:collapse}
+.match-table td{padding:.5rem .4rem;font-size:.84rem;vertical-align:middle}
+.match-def{color:#bdc8dc;padding-right:.75rem;width:55%}
+.match-def span{color:var(--muted);font-size:.72rem;margin-right:.35rem;font-weight:700}
+/* Reading */
+.rtext{background:var(--s2);border:1px solid var(--border);border-radius:var(--r);padding:1.15rem 1.5rem;margin-bottom:1.2rem;font-size:.9rem;line-height:1.95;color:#ccd6ea}
+.rtext h3{font-family:'Bebas Neue',sans-serif;font-size:1.35rem;color:var(--gold);margin-bottom:.2rem;letter-spacing:.05em}
+.rtext .meta{font-size:.75rem;color:var(--muted);margin-bottom:1rem;font-style:italic}
+.rtext p{margin-bottom:.85rem}
+.rtext p:last-child{margin-bottom:0}
+.ql{color:var(--accent);font-weight:700;font-size:.82rem}
+.al{color:var(--gold);font-weight:700;font-size:.82rem}
+.par-num{color:var(--accent);font-weight:700;font-size:.75rem;margin-right:.35rem}
+
+/* ── DECISION EXERCISE ── */
+.decision-scene{background:var(--s2);border:1px solid rgba(34,197,94,.2);border-radius:10px;padding:1.1rem;margin-bottom:1rem}
+.char-bubble{display:flex;align-items:flex-start;gap:.85rem;margin-bottom:1rem}
+.char-avatar{font-size:2.5rem;flex-shrink:0;width:48px;text-align:center;background:var(--s3);border-radius:50%;height:48px;display:flex;align-items:center;justify-content:center;line-height:1}
+.char-info{flex:1}
+.char-name{font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--ps-col);font-weight:700;margin-bottom:.25rem}
+.char-text{font-size:.87rem;color:#ccd6ea;line-height:1.65;background:var(--s3);border-radius:0 8px 8px 8px;padding:.7rem .9rem}
+.dec-options{display:flex;flex-direction:column;gap:.5rem}
+.dec-btn{background:var(--s3);border:1px solid var(--border);border-radius:8px;padding:.65rem 1rem;text-align:left;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:.85rem;color:var(--text);transition:border-color .15s,background .15s;display:flex;align-items:center;gap:.7rem}
+.dec-btn:hover:not(:disabled){border-color:var(--accent);background:rgba(74,158,255,.06)}
+.dec-btn .dec-letter{font-family:'Bebas Neue',sans-serif;font-size:1rem;color:var(--muted);width:20px;flex-shrink:0}
+.dec-btn.chosen-best{border-color:var(--ok);background:rgba(34,197,94,.1)}
+.dec-btn.chosen-bad{border-color:var(--err);background:rgba(239,68,68,.08)}
+.dec-btn.reveal-best{border-color:rgba(34,197,94,.5);background:rgba(34,197,94,.06)}
+.dec-feedback{display:none;margin-top:.9rem;border-radius:8px;padding:.75rem 1rem;font-size:.85rem;line-height:1.65}
+.dec-feedback.show{display:block}
+.dec-feedback.good{background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3);color:#86efac}
+.dec-feedback.bad{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.3);color:#fca5a5}
+.dec-feedback b{color:var(--text)}
+
+/* ── CLIENT FILE ── */
+.client-file-task{background:rgba(245,200,66,.05);border:2px solid rgba(245,200,66,.25);border-radius:12px;padding:1.25rem 1.35rem;margin-bottom:1rem}
+.cf-header{display:flex;align-items:center;gap:.75rem;margin-bottom:.85rem}
+.cf-icon{font-size:1.8rem}
+.cf-title-wrap{}
+.cf-label{font-size:.7rem;text-transform:uppercase;letter-spacing:.12em;color:var(--gold);font-weight:700}
+.cf-title{font-family:'Bebas Neue',sans-serif;font-size:1.35rem;color:var(--text);letter-spacing:.04em}
+.cf-prompt{font-size:.83rem;color:#bdc8dc;line-height:1.7;margin-bottom:.85rem}
+.cf-prompts{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.85rem}
+.cf-bullet{background:var(--s3);border:1px solid var(--border);border-radius:100px;padding:.22rem .7rem;font-size:.75rem;color:var(--muted)}
+.cf-textarea{width:100%;min-height:130px;background:var(--s2);border:1px solid rgba(245,200,66,.25);border-radius:8px;padding:.75rem 1rem;color:var(--text);font-family:'DM Sans',sans-serif;font-size:.87rem;line-height:1.65;resize:vertical}
+.cf-textarea:focus{outline:none;border-color:var(--gold)}
+
+/* ── CLIENT FILE PAGE ── */
+#cf-page{flex:1;padding:1.75rem 2rem;max-width:850px;display:none}
+.cf-page-title{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:.04em;color:var(--gold);margin-bottom:.3rem}
+.cf-page-sub{color:var(--muted);font-size:.87rem;margin-bottom:1.5rem}
+.cf-entry{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);margin-bottom:1rem;overflow:hidden}
+.cf-entry-hdr{padding:.75rem 1.1rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.6rem}
+.cf-entry-num{font-family:'Bebas Neue',sans-serif;font-size:.85rem;color:var(--gold);letter-spacing:.07em}
+.cf-entry-title{font-weight:700;font-size:.88rem}
+.cf-entry-body{padding:1rem 1.1rem;font-size:.87rem;color:#bdc8dc;line-height:1.7;white-space:pre-wrap}
+.cf-entry-empty{padding:1rem 1.1rem;font-size:.84rem;color:var(--muted);font-style:italic}
+.btn-download-cf{background:linear-gradient(135deg,var(--gold),#e8a800);color:#000;border:none;border-radius:10px;padding:.75rem 1.85rem;font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:.07em;cursor:pointer;transition:transform .15s}
+.btn-download-cf:hover{transform:translateY(-1px)}
+
+/* ── FINAL BOSS ── */
+.final-boss{background:linear-gradient(135deg,rgba(168,85,247,.1),rgba(74,158,255,.08));border:1px solid rgba(168,85,247,.3);border-radius:14px;padding:1.5rem 1.6rem;margin-top:1.25rem}
+.fb-header{display:flex;align-items:center;gap:1rem;margin-bottom:1rem}
+.fb-icon{font-size:2.5rem}
+.fb-title{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--gold);letter-spacing:.04em;line-height:1}
+.fb-sub{font-size:.8rem;color:var(--muted);margin-top:.15rem}
+.fb-body{font-size:.87rem;color:#ccd6ea;line-height:1.75;margin-bottom:1rem}
+.fb-checklist{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1rem}
+.fb-check{display:flex;align-items:flex-start;gap:.6rem;background:var(--s2);border:1px solid var(--border);border-radius:8px;padding:.55rem .85rem;font-size:.84rem;color:#ccd6ea}
+.fb-check .fbc-num{font-family:'Bebas Neue',sans-serif;font-size:1rem;color:var(--gold);width:22px;flex-shrink:0}
+
+/* ── SUBMIT / FOOTER ── */
+.sfooter{margin-top:1.4rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.btn-quest{background:linear-gradient(135deg,var(--gold),#e8a800);color:#000;border:none;border-radius:10px;padding:.8rem 1.85rem;font-family:'Bebas Neue',sans-serif;font-size:1.15rem;letter-spacing:.07em;cursor:pointer;transition:transform .15s,box-shadow .15s}
+.btn-quest:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 6px 20px rgba(245,200,66,.35)}
+.btn-quest:disabled{opacity:.35;cursor:not-allowed;transform:none}
+.mission-status{font-size:.82rem;color:var(--muted)}
+.btn-nxt{background:var(--s2);border:1px solid var(--border);border-radius:10px;color:var(--text);padding:.8rem 1.3rem;font-family:'DM Sans',sans-serif;font-weight:700;font-size:.87rem;cursor:pointer;display:none;align-items:center;gap:.4rem;transition:border-color .15s}
+.btn-nxt.show{display:flex}
+.btn-nxt:hover{border-color:var(--gold)}
+.send-status{display:none;align-items:center;gap:.5rem;font-size:.8rem;padding:.5rem .85rem;border-radius:8px;border:1px solid var(--border);background:var(--s2)}
+.send-status.show{display:flex}
+.send-status.sending{color:var(--muted)}
+.send-status.sent{color:var(--ok);border-color:rgba(34,197,94,.35);background:rgba(34,197,94,.07)}
+.send-status.error{color:#f59e0b;border-color:rgba(245,158,11,.35);background:rgba(245,158,11,.07)}
+.spinner{width:14px;height:14px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ── EXERCISE FOOTER ── */
+.ex-footer{display:flex;align-items:center;gap:.85rem;margin-top:1rem;padding-top:.85rem;border-top:1px solid var(--border);flex-wrap:wrap}
+.btn-check{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:.6rem 1.35rem;font-family:'DM Sans',sans-serif;font-weight:700;font-size:.85rem;cursor:pointer;transition:transform .15s,opacity .15s}
+.btn-check:hover{transform:translateY(-1px);opacity:.9}
+.btn-check:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.btn-save-open{background:var(--s2);border:1px solid var(--border);border-radius:8px;color:var(--text);padding:.6rem 1.35rem;font-family:'DM Sans',sans-serif;font-weight:700;font-size:.85rem;cursor:pointer;transition:border-color .15s}
+.btn-save-open:hover{border-color:var(--gold)}
+.check-result{font-size:.82rem;color:var(--muted)}
+.check-result.good{color:var(--ok)}.check-result.saved{color:var(--gold)}
+
+/* ── MISSION COMPLETE ── */
+.mission-complete{display:none;background:linear-gradient(135deg,rgba(245,200,66,.07),rgba(74,158,255,.05));border:1px solid rgba(245,200,66,.28);border-radius:14px;padding:1.4rem 1.6rem;margin-top:1.25rem;animation:mcIn .45s cubic-bezier(.34,1.56,.64,1)}
+.mission-complete.show{display:block}
+@keyframes mcIn{from{opacity:0;transform:translateY(12px) scale(.97)}to{opacity:1;transform:none}}
+.mc-header{display:flex;align-items:center;gap:1rem;margin-bottom:1rem;flex-wrap:wrap}
+.mc-icon{font-size:2.2rem}
+.mc-title{font-family:'Bebas Neue',sans-serif;font-size:1.9rem;color:var(--gold);letter-spacing:.04em;line-height:1}
+.mc-subtitle{font-size:.8rem;color:var(--muted);margin-top:.15rem}
+.mc-stats{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:.85rem}
+.mc-stat{text-align:center;background:var(--s2);border:1px solid var(--border);border-radius:10px;padding:.65rem 1rem}
+.mc-stat-val{font-family:'Bebas Neue',sans-serif;font-size:1.9rem;letter-spacing:.04em;line-height:1}
+.mc-stat-val.xpv{color:var(--gold)}.mc-stat-val.autov{color:var(--ok)}.mc-stat-val.totv{color:var(--accent)}
+.mc-stat-lbl{font-size:.68rem;color:var(--muted);margin-top:.15rem;text-transform:uppercase;letter-spacing:.08em}
+.mc-skills{display:flex;gap:.6rem;margin-bottom:.75rem;flex-wrap:wrap}
+.mc-skill-chip{padding:.3rem .75rem;border-radius:100px;font-size:.77rem;font-weight:700}
+.mc-rank-row{display:flex;align-items:center;gap:.75rem}
+.rank-up-msg{display:inline-flex;align-items:center;gap:.4rem;background:linear-gradient(135deg,rgba(245,200,66,.15),rgba(74,158,255,.1));border:1px solid rgba(245,200,66,.35);border-radius:8px;padding:.4rem .9rem;font-size:.82rem;font-weight:700;color:var(--gold);margin-top:.65rem;animation:glowPulse 1.5s ease infinite}
+@keyframes glowPulse{0%,100%{box-shadow:0 0 8px rgba(245,200,66,.2)}50%{box-shadow:0 0 20px rgba(245,200,66,.5)}}
+.mc-cf-remind{background:rgba(245,200,66,.07);border:1px solid rgba(245,200,66,.2);border-radius:8px;padding:.65rem .9rem;font-size:.82rem;color:#e8d87a;margin-top:.75rem;display:flex;align-items:center;gap:.6rem}
+
+@media(max-width:680px){.sidebar{display:none}.content{padding:1rem}.kw-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- ══ ONBOARDING ══ -->
+<div id="onboarding">
+  <div class="ob-card">
+    <div class="ob-dots" id="ob-dots">
+      <div class="ob-dot active"></div><div class="ob-dot"></div><div class="ob-dot"></div><div class="ob-dot"></div>
+    </div>
+    <div class="ob-slide active" id="ob-s1">
+      <span class="ob-emoji">🇬🇧</span>
+      <div class="ob-title">UK Guide Agency</div>
+      <div class="ob-text">Welcome, future travel guide! You have just been hired by the <b>UK Guide Agency</b>.<br><br>Over the next <b>5 missions</b>, your manager will set you challenges to complete. Each mission trains a different skill you need to work as a professional UK travel guide.<br><br><b>Your first client, Ms. Taylor, is already waiting.</b> Are you ready?</div>
+    </div>
+    <div class="ob-slide" id="ob-s2">
+      <span class="ob-emoji">🗺️</span>
+      <div class="ob-title">5 Missions</div>
+      <div class="ob-text">Complete all 5 missions to earn your Elite Guide status.</div>
+      <div class="ob-missions">
+        <div class="ob-mission"><div class="mn">🚂 Mission 1</div><div class="md">Transport &amp; Tech Vocabulary</div></div>
+        <div class="ob-mission"><div class="mn">🔮 Mission 2</div><div class="md">Future Tenses</div></div>
+        <div class="ob-mission"><div class="mn">🗺️ Mission 3</div><div class="md">1st &amp; 2nd Conditionals</div></div>
+        <div class="ob-mission"><div class="mn">⏪ Mission 4</div><div class="md">3rd Conditional</div></div>
+        <div class="ob-mission"><div class="mn">🎤 Mission 5</div><div class="md">Phrasal Verbs</div></div>
+      </div>
+      <div class="ob-text" style="margin:0">⚠️ <b>You must complete each mission before unlocking the next.</b></div>
+    </div>
+    <div class="ob-slide" id="ob-s3">
+      <span class="ob-emoji">⭐</span>
+      <div class="ob-title">XP &amp; Skills</div>
+      <div class="ob-text">Earn <b>100 XP</b> across all missions and rise through the ranks:</div>
+      <div class="ob-ranks">
+        <div class="ob-rank"><span class="ri">🎫</span><span class="rn">Rookie</span><span class="rx">0–19 XP · Just starting out</span></div>
+        <div class="ob-rank"><span class="ri">🗺️</span><span class="rn">Explorer</span><span class="rx">20–44 XP · Finding your way</span></div>
+        <div class="ob-rank"><span class="ri">⭐</span><span class="rn">Expert Guide</span><span class="rx">45–64 XP · Impressive!</span></div>
+        <div class="ob-rank"><span class="ri">🎖️</span><span class="rn">Senior Guide</span><span class="rx">65–84 XP · Outstanding!</span></div>
+        <div class="ob-rank"><span class="ri">👑</span><span class="rn">Elite Guide</span><span class="rx">85–100 XP · Top of the class!</span></div>
+      </div>
+      <div class="ob-skills">
+        <div class="ob-skill"><span class="sk">🧠</span><div><div class="sn" style="color:#4A9EFF">Language XP</div><div class="sd">Grammar &amp; vocabulary exercises — auto-corrected</div></div></div>
+        <div class="ob-skill"><span class="sk">🧩</span><div><div class="sn" style="color:#22c55e">Problem Solving XP</div><div class="sd">Decision scenarios — choose the best option</div></div></div>
+        <div class="ob-skill"><span class="sk">🗣️</span><div><div class="sn" style="color:#F5C842">Communication</div><div class="sd">Writing tasks — graded by your teacher</div></div></div>
+      </div>
+    </div>
+    <div class="ob-slide" id="ob-s4">
+      <span class="ob-emoji">📁</span>
+      <div class="ob-title">Your Client File</div>
+      <div class="ob-text">At the end of each mission, you will complete a <b>Guide Task</b> — a short writing piece that goes into your <b>Client File</b>.</div>
+      <div class="ob-skills">
+        <div class="ob-skill"><span class="sk">✍️</span><div><div class="sn" style="color:#F5C842">Build it mission by mission</div><div class="sd">Each task adds one section to your file</div></div></div>
+        <div class="ob-skill"><span class="sk">📁</span><div><div class="sn" style="color:#F5C842">View it anytime</div><div class="sd">Click "Client File" in the sidebar</div></div></div>
+        <div class="ob-skill"><span class="sk">🎥</span><div><div class="sn" style="color:#F5C842">Use it for your final video</div><div class="sd">Your Client File becomes the script for Mission 5!</div></div></div>
+      </div>
+      <div class="ob-text" style="margin-bottom:.5rem">Your progress is <b>saved automatically</b> after every exercise. You can close and come back anytime using your school email.</div>
+      <button class="btn-ob-start" onclick="enterApp()">🚀 Start Your Training!</button>
+    </div>
+    <div class="ob-nav" id="ob-nav">
+      <button class="btn-ob-prev" onclick="obPrev()">← Back</button>
+      <button class="btn-ob-next" onclick="obNext()">Next →</button>
+    </div>
+    <button class="ob-skip" onclick="enterApp()">Skip intro</button>
+  </div>
+</div>
+
+<!-- ══ LOGIN ══ -->
+<div id="login">
+  <div class="lcard">
+    <span class="lflag">🇬🇧</span>
+    <div class="llogo">UK Guide Agency</div>
+    <div class="lsub">4t ESO · English Project</div>
+    <div class="field"><label>Full Name</label>
+      <input id="inp-name" type="text" placeholder="e.g. Joan Garcia Llopis" autocomplete="off"></div>
+    <div class="field"><label>School Email</label>
+      <input id="inp-email" type="email" placeholder="cognom.nom@institutmatadepera.cat" autocomplete="off" oninput="validateEmail()">
+      <div class="email-warn" id="email-warn"></div></div>
+    <div class="field"><label>Class / Group</label>
+      <select id="inp-class">
+        <option value="">– Select your group –</option>
+        <option>4t ESO A</option><option>4t ESO B</option>
+      </select></div>
+    <button class="btn-start" onclick="tryLogin()">⚔️ Begin Training</button>
+    <div class="login-loading" id="login-loading"><span class="spinner" style="display:inline-block"></span> Loading your progress…</div>
+  </div>
+</div>
+
+<!-- ══ RESUME ══ -->
+<div id="resume">
+  <div class="res-card">
+    <div class="res-title">Welcome back! 👋</div>
+    <div class="res-sub" id="res-sub">Your progress has been loaded.</div>
+    <div class="res-missions" id="res-missions"></div>
+    <button class="btn-resume" onclick="launchApp()">Continue Training →</button>
+  </div>
+</div>
+
+<!-- ══ APP ══ -->
+<div id="app">
+  <div class="topbar">
+    <div class="topbar-logo">🇬🇧 UK Guide Agency</div>
+    <div class="topbar-right">
+      <div class="chip">Guide: <b id="chip-name"></b></div>
+      <div class="chip">Group: <b id="chip-class"></b></div>
+      <div class="xp-chip">
+        <span class="xri" id="tb-rank-ico">🎫</span>
+        <span class="xrl" id="tb-rank-lbl">Rookie</span>
+        <span class="xrv" id="tb-xp">0</span>
+        <span class="xru">XP</span>
+      </div>
+    </div>
+  </div>
+  <div class="app-body">
+    <div class="sidebar">
+      <div class="sb-label">Missions</div>
+      <div id="stabs"></div>
+      <div class="sb-divider"></div>
+      <div class="stab" id="stab-cf" onclick="showClientFile()">
+        <div class="tab-icon">📁</div>
+        <div class="tab-info"><div class="tab-name">Client File</div><div class="tab-num">My dossier</div></div>
+      </div>
+      <div class="sb-xp-block" style="margin-top:.75rem">
+        <div class="sb-rank-row">
+          <span class="sb-rank-ico" id="sb-rank-ico">🎫</span>
+          <span class="sb-rank-name" id="sb-rank-name">Rookie</span>
+        </div>
+        <div class="sb-xp-count">Total XP: <b id="sb-xp-count">0</b> / 100</div>
+        <div class="xp-bar-wrap"><div class="xp-bar-fill" id="sb-xp-fill"></div></div>
+        <div class="sb-next-rank" id="sb-next-rank">Next rank at 20 XP</div>
+        <div class="sb-divider" style="margin:.6rem 0"></div>
+        <div class="sb-skills">
+          <div class="sb-skill-row"><span class="sb-skill-name">🧠 Language</span><span class="sb-skill-val sv-lang" id="sk-lang-val">0 XP</span></div>
+          <div class="sb-skill-row"><span class="sb-skill-name">🧩 Problem Solving</span><span class="sb-skill-val sv-ps" id="sk-ps-val">0 XP</span></div>
+          <div class="sb-skill-row"><span class="sb-skill-name">🗣️ Communication</span><span class="sb-skill-val sv-comm" id="sk-comm-val">Pending</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="content" id="content-area"></div>
+    <div id="cf-page">
+      <div class="cf-page-title">📁 My Client File</div>
+      <div class="cf-page-sub">Your accumulated guide notes for Ms. Taylor. This becomes your script for the final video.</div>
+      <div id="cf-entries"></div>
+      <button class="btn-download-cf" onclick="downloadClientFile()">⬇ Download Client File</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════════════════════════════════════
+//  CONFIG
+// ══════════════════════════════════════════════════════════════
+const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwvnb5HHHv6c_7pIbgxUnkU1shPqQ_VvhC5lx4UkdLFgBGwZk8lt7qMQqnm0PX-b-Cluw/exec';
+
+const RANKS = [
+  {min:0,  title:'Rookie',       icon:'🎫', next:20},
+  {min:20, title:'Explorer',     icon:'🗺️', next:45},
+  {min:45, title:'Expert Guide', icon:'⭐', next:65},
+  {min:65, title:'Senior Guide', icon:'🎖️', next:85},
+  {min:85, title:'Elite Guide',  icon:'👑', next:null},
+];
+
+const MISSION_COLORS = {
+  1:{accent:'#4A9EFF',bg:'rgba(74,158,255,.06)',border:'rgba(74,158,255,.22)'},
+  2:{accent:'#a855f7',bg:'rgba(168,85,247,.06)',border:'rgba(168,85,247,.22)'},
+  3:{accent:'#10b981',bg:'rgba(16,185,129,.06)',border:'rgba(16,185,129,.22)'},
+  4:{accent:'#f59e0b',bg:'rgba(245,158,11,.06)',border:'rgba(245,158,11,.22)'},
+  5:{accent:'#f43f5e',bg:'rgba(244,63,94,.06)',border:'rgba(244,63,94,.22)'},
+};
+
+// ══════════════════════════════════════════════════════════════
+//  SESSION DATA
+// ══════════════════════════════════════════════════════════════
+const SESSIONS = [
+// ─── MISSION 1 – GETTING THERE ────────────────────────────────
+{num:1,id:'s1',icon:'🚂',title:'Getting There',
+ image:'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=700&q=80',
+ imageAlt:'London red double-decker bus',
+ intro:'Your manager has your first briefing ready. Before you can guide Ms. Taylor around the UK, you need to master the basics: transport, technology and the phrasal verbs every guide uses every day.',
+ bossMsg:'Welcome to UK Guide Agency! Ms. Taylor arrives in London next week. Before she does, make sure you know the transport network inside out. A guide who gets lost is not a guide at all.',
+ youtubeId1:'SyNt5zm3U_M', youtubeTitle1:'The Beatles – Ticket to Ride (1965)',
+ youtubeId2:'EfK-WX2pa8c', youtubeTitle2:'The Clash – London Calling (1979)',
+ musicText:'"<b>Ticket to Ride</b>" by The Beatles is packed with travel vocabulary — a ticket, riding, going away. It was recorded at <b>Abbey Road Studios</b> in London, now one of the most photographed tourist spots in the UK. "<b>London Calling</b>" by The Clash captures the electric urgency of arriving in the capital. These two songs, recorded 14 years apart, show you two very different sides of London.',
+ theory:`<h3>1. Types of Transport in the UK</h3>
+<table class="th-table"><tr><th>Transport</th><th>Key vocabulary</th><th>UK fact</th></tr>
+<tr><td>✈️ Plane</td><td>board, departure gate, boarding pass, hand luggage, layover, direct/connecting flight</td><td>London has 6 airports — most in Europe</td></tr>
+<tr><td>🚂 Train</td><td>platform, single/return ticket, peak/off-peak, delay, first class</td><td>Over 2,500 train stations in the UK</td></tr>
+<tr><td>🚇 Tube</td><td>line, Oyster card, rush hour, Mind the Gap, change (= transfer)</td><td>London Tube (1863) — world's oldest underground</td></tr>
+<tr><td>🚌 Coach</td><td>bus stop, double-decker, top deck, National Express</td><td>Red double-deckers are an icon of London</td></tr>
+<tr><td>⛴️ Eurostar</td><td>cross, port, deck, Channel Tunnel</td><td>London to Paris in under 2h30m</td></tr>
+<tr><td>🚗 Car</td><td>motorway, roundabout, road works, hire a car</td><td>UK drives on the LEFT</td></tr></table>
+<h3>2. Technology Vocabulary</h3>
+<div class="kw-grid">
+<div class="kw-item">📱 <b>app</b> – software on your phone</div>
+<div class="kw-item">📍 <b>GPS</b> – Global Positioning System</div>
+<div class="kw-item">📲 <b>QR code</b> – scannable digital code</div>
+<div class="kw-item">💳 <b>contactless</b> – tap to pay, no PIN</div>
+<div class="kw-item">🎫 <b>e-ticket</b> – digital ticket on phone</div>
+<div class="kw-item">📸 <b>go viral</b> – spread rapidly to millions</div>
+<div class="kw-item">🌍 <b>roaming</b> – using your network abroad</div>
+<div class="kw-item">☁️ <b>cloud storage</b> – saving files online</div></div>
+<h3>3. Transport Phrasal Verbs</h3>
+<table class="th-table"><tr><th>Phrasal Verb</th><th>Meaning</th><th>Example</th></tr>
+<tr><td>set off</td><td>depart, start a journey</td><td>"We set off at 6 AM."</td></tr>
+<tr><td>check in / out</td><td>register at / leave hotel or airport</td><td>"Check out before 11 AM."</td></tr>
+<tr><td>get on / off</td><td>board / exit transport</td><td>"Get off at the next stop."</td></tr>
+<tr><td>pick up / drop off</td><td>collect / leave someone</td><td>"The taxi dropped us off at the hotel."</td></tr>
+<tr><td>get around</td><td>travel within a place</td><td>"Get around London by Tube."</td></tr>
+<tr><td>pick up</td><td>learn informally</td><td>"I picked up some Welsh phrases."</td></tr></table>`,
+ exercises:[
+  {id:'ex1',type:'match',title:'Match the definition',skill:'lang',pts:8,
+   hint:'Read the Theory section on transport vocabulary before starting.',
+   instr:'Select the correct word for each definition. Each word is used once.',
+   opts:['boarding pass','platform','single ticket','return ticket','hand luggage','rush hour','layover','departure gate'],
+   items:[
+    {def:'Document that allows you to board a plane',ans:'boarding pass'},
+    {def:'Numbered area at a train station where you board',ans:'platform'},
+    {def:'A ticket for travel in one direction only',ans:'single ticket'},
+    {def:'A ticket that includes travel there AND back',ans:'return ticket'},
+    {def:'Small bag you carry onto the plane (not checked in)',ans:'hand luggage'},
+    {def:'Busy time when people travel to/from work',ans:'rush hour'},
+    {def:'A stop at an airport between connecting flights',ans:'layover'},
+    {def:'Area in the airport where you board your specific flight',ans:'departure gate'},
+   ]},
+  {id:'ex2',type:'sel-blanks',title:'Complete the travel sentences',skill:'lang',pts:6,
+   hint:'Think about the meaning of each sentence. All words are in the Theory section.',
+   instr:'Choose the correct word from the word bank.',
+   bank:['delayed','platform','check in','contactless','itinerary','connection'],
+   items:[
+    {before:'Our flight was',ans:'delayed',after:'by two hours because of thick fog.'},
+    {before:'The train to Edinburgh departs from',ans:'platform',after:'7. Hurry!'},
+    {before:'You should',ans:'check in',after:'online 24 hours before your flight.'},
+    {before:'I paid with my',ans:'contactless',after:'card — no PIN, just tap!'},
+    {before:'The agency sent us a full',ans:'itinerary',after:'with hotels, tours and all transport.'},
+    {before:'We need to run — our',ans:'connection',after:'to Dublin leaves in 15 minutes!'},
+   ]},
+  {id:'ex3',type:'radio-mc',title:'Tech Vocabulary',skill:'lang',pts:5,
+   hint:'Review the Technology Vocabulary section in Theory.',
+   instr:'Choose the best answer for each question.',
+   items:[
+    {q:'What is a "QR code"?',opts:['A train pass','A scannable digital code storing information','A travel insurance document','A Wi-Fi network'],ans:1},
+    {q:'What does "go viral" mean on social media?',opts:['Get a computer virus','Delete your account','Spread rapidly to millions of people','Pay for a premium account'],ans:2},
+    {q:'What is "roaming"?',opts:['Walking around a city','Using your phone network abroad','A type of travel insurance','A free Wi-Fi hotspot'],ans:1},
+    {q:'What is an "e-ticket"?',opts:['A paper ticket from the station','A digital ticket on phone or email','A first-class upgrade','An eco-friendly pass'],ans:1},
+    {q:'What does "contactless payment" mean?',opts:['Paying without touching anything','Tapping your card/phone — no PIN needed','Paying online from home','Paying with cash only'],ans:1},
+   ]},
+  {id:'ex4',type:'true-false',title:'UK Transport Facts',skill:'lang',pts:5,
+   hint:'All answers are in the Transport Types table in Theory.',
+   instr:'Decide if each statement is True or False.',
+   items:[
+    {q:'The London Underground first opened in 1863.',ans:'true'},
+    {q:'London has fewer airports than any other European capital.',ans:'false'},
+    {q:'In the UK, people drive on the right side of the road.',ans:'false'},
+    {q:'The Eurostar travels through the Channel Tunnel.',ans:'true'},
+    {q:'National Express is a UK coach company.',ans:'true'},
+   ]},
+  {id:'ex5',type:'decision',title:'Crisis at Heathrow!',skill:'ps',pts:3,
+   character:'taylor',charName:'Ms. Taylor',charEmoji:'👩',
+   scenario:'Ms. Taylor has just landed at Heathrow. She messages you: "My luggage has been lost by the airline! I have a guided city tour booked in 2 hours. What should I do?"',
+   instr:'As her guide, choose the best course of action.',
+   options:[
+    {text:'Skip the luggage report and rush to the tour. She can sort the luggage later.',outcome:'Ms. Taylor makes the tour but the airline cannot trace her luggage without a report. She ends up without clothes for two days. Not ideal!',xp:1,best:false},
+    {text:'File a lost luggage report at the airline desk immediately, then contact the tour company to ask if she can join 30 minutes late.',outcome:'Excellent decision! You handle both problems at once. Ms. Taylor is relieved and the tour company is understanding. The luggage arrives at her hotel that evening.',xp:3,best:true},
+    {text:'Cancel the tour and spend the whole afternoon at the lost luggage desk.',outcome:'Ms. Taylor is very frustrated. She paid a lot for the tour and this was not necessary — the report only takes 10 minutes!',xp:0,best:false},
+   ]},
+  {id:'ex6',type:'radio-mc',title:'Phrasal Verbs in Context',skill:'lang',pts:3,
+   hint:'Review the Transport Phrasal Verbs table. Remember: "pick up" has two meanings!',
+   instr:'Choose the correct phrasal verb to complete each sentence.',
+   items:[
+    {q:'We need to ___ early tomorrow morning to avoid the traffic.',opts:['set off','check in','drop off','get around'],ans:0},
+    {q:'The best way to ___ central London is by Tube.',opts:['pick up','set off','get around','check in'],ans:2},
+    {q:'Could you ___ me at the train station at 8 AM?',opts:['check in','drop off','set off','pick up'],ans:3},
+   ]},
+ ],
+ cfTitle:'Mission 1: UK Essentials',
+ cfPrompt:'Write a short introduction (5–6 sentences) about the UK for Ms. Taylor. Tell her about 3–4 important places to visit and why they are worth seeing. Use transport vocabulary where possible.',
+ cfBullets:['3–4 important UK places','Basic information about each','Why they are worth visiting','Transport or location tips'],
+},
+
+// ─── MISSION 2 – PLAN YOUR ADVENTURE ─────────────────────────
+{num:2,id:'s2',icon:'🔮',title:'Plan Your Adventure',
+ image:'https://images.unsplash.com/photo-1529655683826-aba9b3e77383?w=700&q=80',
+ imageAlt:'Big Ben at sunset',
+ intro:'Ms. Taylor is excited — she wants to plan every detail of her trip. As her guide, you need to talk confidently about schedules, plans and predictions. Master all future forms and you will be unstoppable.',
+ bossMsg:'Great work on Mission 1! Now, Ms. Taylor needs a detailed plan. She is very organised and wants to know <b>exactly</b> what will happen, what is arranged, and what might change. Make sure your future tenses are perfect.',
+ youtubeId1:'WJW-VvmRKsE', youtubeTitle1:'Charli XCX – 360 (2024)',
+ musicText:'<b>Charli XCX</b> is from Ipswich, Suffolk — as British as it gets! Her 2024 album "Brat" became a global cultural moment. In interviews she talks constantly about her future: <i>"I\'m going to keep making music on my own terms"</i> (going to = prior plan) vs <i>"I\'ll probably do another tour"</i> (will = spontaneous prediction). Notice the difference? That\'s exactly what this mission is about.',
+ theory:`<h3>1. Will + Infinitive</h3>
+<p>Use <b>will</b> for: spontaneous decisions, predictions based on opinion, offers, promises.</p>
+<div class="ex-box">"I'll get the window seat!" (decided NOW) | "I think it will rain." (opinion) | "I'll carry your bag." (offer)</div>
+<div class="sig-words"><span class="sw">I think…</span><span class="sw">probably</span><span class="sw">definitely</span><span class="sw">I hope…</span></div>
+<h3>2. Going to + Infinitive</h3>
+<p>Use <b>going to</b> for prior plans/intentions OR predictions with visible evidence.</p>
+<div class="ex-box">"We're going to visit Stonehenge." (planned) | "Look at those clouds! It's going to rain." (evidence)</div>
+<div class="err-box">❌ "I will visit Edinburgh. I already booked the hotel." → ✓ "I'm <b>going to visit</b> Edinburgh — I booked it already."</div>
+<h3>3. Present Continuous (future meaning)</h3>
+<p>Use for <b>fixed, confirmed arrangements</b> — booked, agreed, organised.</p>
+<div class="ex-box">"We're flying to Heathrow on Friday." (tickets booked) | "She's meeting the group at 10." (arranged)</div>
+<h3>4. Present Simple (future meaning)</h3>
+<p>Use for <b>official timetables and schedules</b>.</p>
+<div class="ex-box">"The tour bus departs at 9:30." | "The last Tube leaves at midnight."</div>
+<h3>5. Future Continuous (will be + -ing)</h3>
+<p>Use for an action <b>in progress at a specific future moment</b>.</p>
+<div class="ex-box">"This time next week, I'll be walking along the Thames!" | "At 8 PM we'll be watching a West End show."</div>
+<h3>6. Quick Guide</h3>
+<table class="th-table"><tr><th>Situation</th><th>Form</th></tr>
+<tr><td>Official timetable</td><td>Present Simple</td></tr>
+<tr><td>Confirmed arrangement (booked)</td><td>Present Continuous</td></tr>
+<tr><td>Prior intention / plan</td><td>going to</td></tr>
+<tr><td>Evidence-based prediction</td><td>going to</td></tr>
+<tr><td>Opinion / spontaneous</td><td>will</td></tr>
+<tr><td>Action in progress at future moment</td><td>Future Continuous</td></tr></table>`,
+ exercises:[
+  {id:'ex1',type:'radio-mc',title:'Choose the correct future form',skill:'lang',pts:6,
+   hint:'Key: Will = spontaneous/opinion · Going to = plan or evidence · Present Continuous = booked · Present Simple = timetable · Future Continuous = in progress at future moment.',
+   quickRef:'Review the Quick Guide table in Theory before starting.',
+   instr:'Select the option that correctly completes each sentence.',
+   items:[
+    {q:'Look at those clouds! It ___ – we should get inside.',opts:['will rain','is going to rain','rains','is raining'],ans:1},
+    {q:'"The next guided tour ___ at 11 AM." (official programme)',opts:['will start','is going to start','starts','is starting'],ans:2},
+    {q:'I think Edinburgh ___ absolutely beautiful in winter.',opts:['is','will be','is going to be','is being'],ans:1},
+    {q:'We ___ at a B&B in Cornwall – I booked it last week!',opts:['will stay','stay','are staying','are going to stay'],ans:2},
+    {q:'This time tomorrow, I ___ along Brighton seafront!',opts:['walk','will walk','am walking','will be walking'],ans:3},
+    {q:'"I forgot my Oyster card!" "Don\'t worry, I ___ you mine."',opts:['am lending','lend','will lend','am going to lend'],ans:2},
+   ]},
+  {id:'ex2',type:'radio-mc',title:'Which future is most natural?',skill:'lang',pts:6,
+   hint:'Think about the context carefully. Is the situation booked? Planned? Decided just now? Or a timetable?',
+   instr:'Choose the most natural and correct option for each context.',
+   items:[
+    {q:'[Timetable board] "The last ferry to Belfast ___ at 11:30 PM."',opts:['will leave','is going to leave','leaves','is leaving'],ans:2},
+    {q:'[You see black clouds] "Look — it ___ snow!"',opts:["it'll snow","it's going to snow","it snows","it's snowing"],ans:1},
+    {q:'[Planned months ago] "I ___ climb Ben Nevis next weekend."',opts:["I'll climb","I climb","I'm going to climb","I'm climbing"],ans:2},
+    {q:'[Decided just now] "These scones are amazing! I ___ buy some for my family."',opts:["I'm buying","I'm going to buy","I buy","I'll buy"],ans:3},
+    {q:'[Confirmed with group] "I ___ a guided tour of Edinburgh Castle on Saturday."',opts:["I'll give","I give","I'm going to give","I'm giving"],ans:3},
+    {q:'[At that exact future moment] "At 2 PM Sunday, we ___ the Changing of the Guard."',opts:["we watch","we'll watch","we're watching","we'll be watching"],ans:3},
+   ]},
+  {id:'ex3',type:'txt-blanks',title:'Complete with the correct future form',skill:'lang',pts:5,
+   hint:'Write the full verb form — contracted forms like I\'ll or we\'re are also accepted.',
+   instr:'Write the correct future form of the verb in brackets.',
+   items:[
+    {before:'The next boat tour of the Thames',verb:'(depart)',after:'at exactly 3 PM. Don\'t be late!',ans:['departs','will depart']},
+    {before:'"I forgot to book a hotel!" "Don\'t panic —',verb:'(sort)',after:'it out right now."',ans:["I'll sort","I will sort"]},
+    {before:'We',verb:'(visit)',after:'the Tate Modern tomorrow — we bought tickets last week.',ans:['are visiting','are going to visit']},
+    {before:'Look at that queue! We',verb:'(wait)',after:'here for hours if we don\'t book online.',ans:["are going to wait","'re going to wait","we are going to wait"]},
+    {before:'This time next Friday, I',verb:'(explore)',after:'the Scottish Highlands.',ans:["'ll be exploring","will be exploring","I'll be exploring"]},
+   ]},
+  {id:'ex4',type:'decision',title:'The Impossible Itinerary!',skill:'ps',pts:3,
+   character:'taylor',charName:'Ms. Taylor',charEmoji:'👩',
+   scenario:'Ms. Taylor calls you: "I\'d love to visit Stonehenge AND the Tower of London on the same day. Both are must-sees for me. Can we do it? The tour bus departs at 9 AM."',
+   instr:'What do you advise?',
+   options:[
+    {text:'Try to rush through both, spending only 30 minutes at each.',outcome:'Ms. Taylor feels stressed and disappointed. She barely had time to look at anything. A good guide prioritises quality over quantity.',xp:1,best:false},
+    {text:'Choose just one without consulting her and cancel the other.',outcome:'Ms. Taylor is very upset — nobody asked her! Always involve your client in decisions that affect their trip.',xp:0,best:false},
+    {text:'Explain clearly that it is not possible in one day and suggest splitting across two days, with a detailed plan for each.',outcome:'Ms. Taylor appreciates your honesty and your detailed plan. She trusts you completely. A great guide always manages expectations!',xp:3,best:true},
+   ]},
+ ],
+ cfTitle:'Mission 2: One-Day Travel Plan',
+ cfPrompt:'Write a one-day itinerary (6–8 sentences) for Ms. Taylor in ONE UK city of your choice. Include places to visit, activities, and approximate times. Use future tenses to explain the plan.',
+ cfBullets:['One UK city','Places to visit with approximate times','Activities in logical order','Future tenses throughout (going to, will, Present Continuous)'],
+},
+
+// ─── MISSION 3 – EXPERT TRAVEL ADVICE ────────────────────────
+{num:3,id:'s3',icon:'🗺️',title:'Expert Travel Advice',
+ image:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=80',
+ imageAlt:'Liverpool Albert Dock waterfront',
+ intro:'Things do not always go to plan. As a guide, you need to give clear advice and handle unexpected situations. The Clash knew all about impossible choices — and today you will face some of your own.',
+ bossMsg:'Even the best guides face unexpected problems. A cancelled train, bad weather, a budget crisis. Your job is to stay calm and give the right advice. Remember: <b>"If I go, there will be trouble. If I stay, it will be double."</b> The Clash understood conditional logic better than most grammar books!',
+ youtubeId1:'BN1WwnEDWAM', youtubeTitle1:'The Clash – Should I Stay or Should I Go (1982)',
+ musicText:'"<b>Should I Stay or Should I Go</b>" by The Clash is <b>built entirely on a First Conditional dilemma</b>: staying leads to one result, going leads to another. This is exactly the structure of "If I do X, Y will happen." Joe Strummer and Mick Jones were both Londoners. Listen carefully: can you spot the conditional logic in the lyrics?',
+ theory:`<h3>1. The First Conditional (Real & Possible)</h3>
+<p>Use for situations that are <b>real and genuinely possible</b>.</p>
+<div class="ex-box"><b>Structure:</b> If + Present Simple → will / can / may / might + infinitive</div>
+<ul><li>"If you <b>book</b> in advance, you <b>will save</b> money."</li>
+<li>"If we <b>hurry</b>, we <b>can catch</b> the last train."</li>
+<li>"If the weather <b>is</b> good, we <b>might go</b> to Brighton."</li></ul>
+<p>Reversed order → no comma: "You <b>will save</b> money if you <b>book</b> early."</p>
+<h4>Useful variations</h4>
+<table class="th-table">
+<tr><th>Word</th><th>Meaning</th><th>Example</th></tr>
+<tr><td><b>unless</b></td><td>= if not</td><td>"Unless you hurry, you won't get a ticket."</td></tr>
+<tr><td><b>as long as</b></td><td>on the condition that</td><td>"You can go as long as you're back by midnight."</td></tr>
+<tr><td><b>in case</b></td><td>because it might happen</td><td>"Take an umbrella in case it rains."</td></tr></table>
+<h3>2. The Second Conditional (Hypothetical)</h3>
+<p>Use for situations that are <b>imaginary, unlikely or impossible now</b>.</p>
+<div class="ex-box"><b>Structure:</b> If + Past Simple → would / could / might + infinitive</div>
+<ul><li>"If I <b>lived</b> in London, I <b>would cycle</b> everywhere."</li>
+<li>"If I <b>were</b> the PM, I <b>would make</b> all museums free."</li></ul>
+<div class="note-box">⚠️ Use <b>"If I <u>were</u>"</b> (not "was") in formal/written English — even with I/he/she.</div>
+<h3>3. First vs Second</h3>
+<table class="th-table">
+<tr><th>First Conditional</th><th>Second Conditional</th></tr>
+<tr><td>Real / possible</td><td>Hypothetical / unlikely</td></tr>
+<tr><td>If + <b>Present Simple</b></td><td>If + <b>Past Simple</b></td></tr>
+<tr><td><b>will / can / may</b></td><td><b>would / could / might</b></td></tr></table>
+<div class="err-box">❌ "If you <b>will visit</b> Liverpool…" → ✓ "If you <b>visit</b> Liverpool…" (NO will in the if-clause!)</div>`,
+ exercises:[
+  {id:'ex1',type:'radio-mc',title:'First or Second Conditional?',skill:'lang',pts:6,
+   hint:'1st Conditional: If + Present Simple + will/can → Real and possible. 2nd Conditional: If + Past Simple + would/could → Hypothetical or imaginary.',
+   instr:'Identify which type of conditional each sentence uses.',
+   items:[
+    {q:'"If you visit Liverpool, you will see the famous Albert Dock."',opts:['First Conditional (real/possible)','Second Conditional (hypothetical)'],ans:0},
+    {q:'"If I were a tour guide, I would take tourists to Snowdonia."',opts:['First Conditional','Second Conditional'],ans:1},
+    {q:'"Unless you book now, you won\'t get tickets for Wimbledon."',opts:['First Conditional','Second Conditional'],ans:0},
+    {q:'"If I had a million pounds, I would rent a private castle in Scotland."',opts:['First Conditional','Second Conditional'],ans:1},
+    {q:'"If you talk to locals, you might find hidden places no guide mentions."',opts:['First Conditional','Second Conditional'],ans:0},
+    {q:'"If I spoke Welsh, I would feel much more connected to Welsh culture."',opts:['First Conditional','Second Conditional'],ans:1},
+   ]},
+  {id:'ex2',type:'radio-mc',title:'Choose the correct verb form',skill:'lang',pts:6,
+   hint:'Remember: 1st Conditional → If + Present Simple (NOT will). 2nd Conditional → If + Past Simple.',
+   instr:'Select the correct verb form.',
+   items:[
+    {q:'If you ___ the Lake District, you will not regret it.',opts:['visit','visited','will visit','would visit'],ans:0},
+    {q:'If I ___ you, I would take the train instead of flying.',opts:['am','was','were','will be'],ans:2},
+    {q:'If we book early, we ___ money on hotels and flights.',opts:['save','saved','will save','would save'],ans:2},
+    {q:'If she ___ in Edinburgh, she would have a better quality of life.',opts:['lives','lived','will live','would live'],ans:1},
+    {q:'"___ you book now, you won\'t get a ticket." (= If you don\'t…)',opts:['Unless','If','Provided','In case'],ans:0},
+    {q:'If I had more free time, I ___ explore every island in Scotland.',opts:['will','might','am going to','can'],ans:1},
+   ]},
+  {id:'ex3',type:'decision',title:'Train Cancelled!',skill:'ps',pts:3,
+   character:'boss',charName:'The Boss',charEmoji:'👔',
+   scenario:'You are guiding Ms. Taylor to Edinburgh. At the station, an announcement says all trains are cancelled due to engineering works. Her hotel check-in is at 6 PM and she has a dinner reservation at 8 PM.',
+   instr:'What do you do? Choose the best option.',
+   options:[
+    {text:'Wait at the station and hope a train runs later.',outcome:'Three hours pass. Ms. Taylor misses dinner and the hotel gives away her room. You needed to act immediately!',xp:0,best:false},
+    {text:'Immediately check for alternative routes (bus/coach), contact the hotel and restaurant to explain the situation, and keep Ms. Taylor informed calmly.',outcome:'Ms. Taylor arrives 90 minutes late but both the hotel and restaurant accommodate her. She is impressed by your calm, professional response. +3 Problem Solving XP!',xp:3,best:true},
+    {text:'Tell Ms. Taylor there is nothing you can do and suggest she contacts the train company herself.',outcome:'Ms. Taylor is furious. A guide\'s job is to solve problems, not hand them back to the client!',xp:0,best:false},
+   ]},
+  {id:'ex4',type:'decision',title:'Weather Emergency!',skill:'ps',pts:2,
+   character:'taylor',charName:'Ms. Taylor',charEmoji:'👩',
+   scenario:'A guided walking tour of the Scottish Highlands is planned for tomorrow. The forecast shows heavy rain and strong winds — potentially dangerous conditions. Ms. Taylor says: "I\'m really looking forward to this!"',
+   instr:'How do you handle this?',
+   options:[
+    {text:'Continue with the outdoor tour regardless — "the client is always right".',outcome:'The tour is dangerous and miserable. Safety must always come first. The client is not always right when safety is involved.',xp:0,best:false},
+    {text:'Cancel everything and refund the money without offering any alternative.',outcome:'Ms. Taylor is disappointed. She had one day in the Highlands! Always offer alternatives before cancelling.',xp:1,best:false},
+    {text:'Explain the weather risk, offer two alternatives (a museum or a scenic drive), and let Ms. Taylor choose.',outcome:'Ms. Taylor chooses the scenic drive and loves it! She appreciates having options. A great guide always has a Plan B.',xp:2,best:true},
+   ]},
+ ],
+ cfTitle:'Mission 3: Guide\'s Advice & Recommendations',
+ cfPrompt:'Write an advice section (5–6 sentences) for Ms. Taylor. Give her tips and recommendations for her UK trip. You MUST include at least one First Conditional and one Second Conditional.',
+ cfBullets:['At least 1 First Conditional: "If you visit…, you will/can…"','At least 1 Second Conditional: "If I were you, I would…"','Practical travel tips','What to do in difficult situations'],
+},
+
+// ─── MISSION 4 – LESSONS LEARNED ─────────────────────────────
+{num:4,id:'s4',icon:'⏪',title:'Lessons Learned',
+ image:'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=700&q=80',
+ imageAlt:'Scottish Highlands misty mountains',
+ intro:'Every professional makes mistakes. What separates a good guide from a great one is learning from them. Iron Maiden said it best: do not waste years repeating the same errors.',
+ bossMsg:'Iron Maiden\'s "Wasted Years" is about looking back at time gone by and wishing things had been different. That is exactly the emotion of the Third Conditional: "If I <b>had done</b> X, I <b>would have done</b> Y differently." Today we analyse what went wrong — and how to avoid it in future.',
+ youtubeId1:'Ij99dud8-0A', youtubeTitle1:'Iron Maiden – Wasted Years (1986)',
+ musicText:'"<b>Wasted Years</b>" by Iron Maiden is all about the feeling of regret — looking back and wishing things had been different. Iron Maiden are from East London (Leyton) and have sold over 100 million albums worldwide. This song captures the exact emotional core of the Third Conditional: impossible past regret. One more connection: notice the phrasal verb in the title — <b>"wasted"</b> comes from the same family as "to waste away." Phrasal connections are everywhere in music!',
+ theory:`<h3>1. The Third Conditional (Impossible Past)</h3>
+<p>Use to talk about past situations that <b>did NOT happen</b> — and imagine the result.</p>
+<div class="ex-box"><b>Structure:</b> If + Past Perfect (had + p.p.) → would have / could have / might have + p.p.</div>
+<ul>
+<li>"If we <b>had arrived</b> earlier, we <b>would have seen</b> the Changing of the Guard." (we didn't → we missed it)</li>
+<li>"If she <b>hadn't forgotten</b> her passport, she <b>could have boarded</b> the flight."</li>
+<li>"If they <b>had booked</b> in advance, they <b>wouldn't have paid</b> so much."</li></ul>
+<h3>2. Critical Errors to Avoid</h3>
+<div class="err-box">❌ "If we <b>would have arrived</b>…" → ✓ "If we <b>had arrived</b>…" (NO would in the if-clause!)<br>❌ "If she <b>didn't forget</b>…" → ✓ "If she <b>hadn't forgotten</b>…" (Past Perfect needed!)</div>
+<h3>3. All Three Conditionals</h3>
+<table class="th-table">
+<tr><th>Type</th><th>If-clause</th><th>Result</th><th>Meaning</th></tr>
+<tr><td><b>1st</b></td><td>Present Simple</td><td>will + inf.</td><td>Future / real</td></tr>
+<tr><td><b>2nd</b></td><td>Past Simple</td><td>would + inf.</td><td>Present-future / hypothetical</td></tr>
+<tr><td><b>3rd</b></td><td>Past Perfect</td><td>would have + p.p.</td><td>Past / impossible to change</td></tr></table>
+<h3>4. Other Ways to Express Regret</h3>
+<table class="th-table">
+<tr><th>Structure</th><th>Example</th></tr>
+<tr><td>I wish I had…</td><td>"I wish I had booked earlier — it's sold out!"</td></tr>
+<tr><td>If only I had…</td><td>"If only we had taken a map."</td></tr>
+<tr><td>I should have…</td><td>"I should have brought a waterproof jacket."</td></tr>
+<tr><td>I shouldn't have…</td><td>"I shouldn't have eaten so many fish and chips."</td></tr></table>
+<h3>5. Spiral Review — Phrasal Verbs (Mission 1)</h3>
+<p>Good guides use phrasal verbs naturally. Here is a quick review of the ones from Mission 1:</p>
+<div class="kw-grid">
+<div class="kw-item">🚀 <b>set off</b> – depart</div>
+<div class="kw-item">🏨 <b>check in/out</b> – register/leave</div>
+<div class="kw-item">🚌 <b>get on/off</b> – board/exit</div>
+<div class="kw-item">🚗 <b>pick up/drop off</b> – collect/leave</div>
+<div class="kw-item">🗺️ <b>get around</b> – travel within</div>
+<div class="kw-item">📚 <b>pick up</b> – learn informally</div></div>`,
+ exercises:[
+  {id:'ex1',type:'radio-mc',title:'Complete the Third Conditional',skill:'lang',pts:6,
+   hint:'Structure: If + HAD + past participle → WOULD HAVE + past participle. Never use "would" in the if-clause!',
+   instr:'Select the correct option.',
+   items:[
+    {q:'If we ___ the tour in advance, we wouldn\'t have queued for two hours.',opts:['booked','have booked','had booked','would have booked'],ans:2},
+    {q:'If she hadn\'t missed the train, she ___ to the festival on time.',opts:['will arrive','would arrive','had arrived','would have arrived'],ans:3},
+    {q:'If I ___ the map, I wouldn\'t have got so lost in the Highlands.',opts:['downloaded','would download','had downloaded','have downloaded'],ans:2},
+    {q:'We wouldn\'t have overpaid if we ___ online earlier.',opts:['checked','had checked','have checked','would have checked'],ans:1},
+    {q:'If you had tried traditional Welsh cawl, you ___ loved it!',opts:['would','will have','would have','had'],ans:2},
+    {q:'They ___ the last ferry if they hadn\'t stopped for fish and chips.',opts:["wouldn't miss","didn't miss","hadn't missed","wouldn't have missed"],ans:3},
+   ]},
+  {id:'ex2',type:'radio-mc',title:'Error Correction — Is it correct?',skill:'lang',pts:5,
+   hint:'Look carefully at the if-clause. Is it Past Perfect? And the result — does it have "would have + past participle"?',
+   instr:'One sentence in each pair is correct. Which version is correct?',
+   items:[
+    {q:'"If we would have left earlier, we would have caught the train."',opts:['Correct as it is','→ "If we had left earlier, we would have caught the train."'],ans:1},
+    {q:'"If she didn\'t forget her passport, she could have travelled."',opts:['Correct as it is','→ "If she hadn\'t forgotten her passport, she could have travelled."'],ans:1},
+    {q:'"If I had known about the festival, I would have bought tickets."',opts:['Correct — no error!','→ "If I knew about the festival, I would have bought tickets."'],ans:0},
+    {q:'"We might have enjoyed it more if the weather had been better."',opts:['Correct — no error!','→ "We might have enjoyed it more if the weather would be better."'],ans:0},
+    {q:'"If they had listened to the guide, they wouldn\'t lose their luggage."',opts:['Correct as it is','→ "If they had listened to the guide, they wouldn\'t have lost their luggage."'],ans:1},
+   ]},
+  {id:'ex3',type:'decision',title:'The Bad Review',skill:'ps',pts:3,
+   character:'boss',charName:'The Boss',charEmoji:'👔',
+   scenario:'A client has left a negative review online: "Our guide didn\'t warn us that the museum was closed on Mondays! We wasted a whole morning." The review is now public.',
+   instr:'As a professional guide, what do you do?',
+   options:[
+    {text:'Ignore the review and hope nobody reads it.',outcome:'The review sits there with no response. More potential clients read it and book with a competitor instead. Always respond to reviews!',xp:0,best:false},
+    {text:'Respond professionally: apologise, acknowledge the mistake, explain what you will do differently, and offer a discount on a future tour.',outcome:'The client updates the review to 4 stars and mentions your professional response. Other potential clients read the reply and are reassured. This is how professionals handle criticism.',xp:3,best:true},
+    {text:'Reply defensively: "The museum website had incorrect information. It was not my fault."',outcome:'The situation escalates. The client replies angrily. Even if you were not 100% at fault, defensiveness never helps. A professional apologises and moves forward.',xp:0,best:false},
+   ]},
+  {id:'ex4',type:'sel-blanks',title:'Spiral: Phrasal Verbs in Action',skill:'lang',pts:3,
+   hint:'All phrasal verbs are from Mission 1. Review the Transport Phrasal Verbs table if you need a reminder!',
+   instr:'This is a spiral exercise — you learned these phrasal verbs in Mission 1. Complete each sentence with the correct phrasal verb from the bank.',
+   bank:['set off','check in','get around','pick up','drop off','get on'],
+   items:[
+    {before:'We should',ans:'set off',after:'early tomorrow to avoid the rush-hour traffic.'},
+    {before:'The hotel told us we could',ans:'check in',after:'from 2 PM onwards.'},
+    {before:'The best way to',ans:'get around',after:'Edinburgh is on foot — the Old Town is very compact.'},
+    {before:'I managed to',ans:'pick up',after:'a few words of Scottish Gaelic from the locals.'},
+   ]},
+ ],
+ cfTitle:'Mission 4: Lessons Learned & Problem-Solving',
+ cfPrompt:'Write a short reflection (5–6 sentences) about things that can go wrong on a UK trip and how to handle them. Include what you SHOULD HAVE done differently, and what your client should do in difficult situations. Use the Third Conditional and/or regret structures.',
+ cfBullets:['What went wrong (real or imaginary)','Third Conditional: "If we had… we would have…"','Regret: "I should have…" / "If only we had…"','Practical advice for future clients'],
+},
+
+// ─── MISSION 5 – ON THE ROAD ──────────────────────────────────
+{num:5,id:'s5',icon:'🎤',title:'On the Road',
+ image:'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=700&q=80',
+ imageAlt:'Live music concert crowd',
+ intro:'Your final mission. Phrasal verbs are the secret language of natural English — masters use them without thinking. Read Adele\'s interview carefully, spot the phrasal verbs, and prove you are ready for Elite Guide status.',
+ bossMsg:'This is it — your final mission before Elite Guide status. Adele once said: <i>"I should have looked after myself better in my twenties."</i> That is a perfect example of a regret structure — and also a reminder: <b>look after yourself, look after your clients, and pick up everything you can from this last mission!</b>',
+ youtubeId1:'YQHsXMglC9A', youtubeTitle1:'Adele – Hello (2015)',
+ musicText:'<b>Adele Laurie Blue Adkins</b> was born in Tottenham, North London, in 1988 and studied at the BRIT School in Croydon. She has spoken publicly about her <b>anxiety and panic attacks</b> before performing, her <b>postnatal depression</b> after the birth of her son Angelo, and how therapy transformed her relationship with herself. Her honesty has made millions of fans feel less alone. In the interview below, notice how many phrasal verbs she uses naturally — this is exactly how fluent English speakers talk.',
+ reading:`<h3>One-on-One with Adele</h3>
+<div class="meta">Fictional interview for educational purposes · Based on Adele's real public statements (Vogue, Graham Norton, Oprah)</div>
+<p><span class="ql">Q:</span> Adele, you grew up in South London. How did it shape who you are?</p>
+<p><span class="al">A:</span> <span class="par-num">[1]</span>London is everything to me. We <b>headed off</b> to West Norwood and Brixton when I was nine. South London has a rawness — people don't <b>put up with</b> nonsense. They tell you what they think, and that honesty comes through in my music. Even now I always <b>look forward to</b> coming home. Nothing compares to a grey London morning.</p>
+<p><span class="ql">Q:</span> You studied at the BRIT School. What do you remember?</p>
+<p><span class="al">A:</span> <span class="par-num">[2]</span>It completely changed my life. I almost didn't go — I was so shy. But my mum <b>sorted out</b> all the paperwork and pushed me. Once I was there, I <b>picked up</b> so many skills — songwriting, stage presence, how to <b>carry on</b> even when things go wrong live. When I <b>found out</b> Amy Winehouse had studied there too, I felt a deep connection to her.</p>
+<p><span class="ql">Q:</span> You have spoken about anxiety and panic attacks on stage.</p>
+<p><span class="al">A:</span> <span class="par-num">[3]</span>Yes, and it got really bad around 2016. I would <b>set off</b> towards the stage and suddenly feel like I couldn't breathe. I completely <b>ran out of</b> ways to cope alone. I also had postnatal depression after my son Angelo was born — I didn't <b>find out</b> what was happening until I spoke to a doctor. I had thought I was failing as a mother.</p>
+<p><span class="ql">Q:</span> How do you manage those feelings now?</p>
+<p><span class="al">A:</span> <span class="par-num">[4]</span>Therapy, above everything else. I genuinely <b>look forward to</b> my sessions every week. I've learned to <b>check in</b> with myself before going on stage — I <b>head off</b> somewhere quiet backstage, breathe, and <b>open up</b> to what I'm actually feeling. My team also shows me around each new city on tour, which helps me feel grounded and present.</p>
+<p><span class="ql">Q:</span> Any regrets?</p>
+<p><span class="al">A:</span> <span class="par-num">[5]</span>I should have looked after myself better in my twenties. I <b>put up with</b> enormous pressure from the industry and from my own impossibly high expectations. If I had been more honest about my struggles earlier, I would have got help sooner. But those experiences gave the world "Someone Like You" and "Hello" — so perhaps I cannot complain too much.</p>`,
+ theory:`<h3>1. What Are Phrasal Verbs?</h3>
+<p>A <b>phrasal verb</b> = verb + preposition or adverb → creates a <b>new meaning</b>, often completely different from the original words.</p>
+<div class="ex-box">"I <b>looked</b> at the map." (used eyes) → "I <b>looked for</b> the hotel." (searched for it)</div>
+<h4>Separable vs Inseparable</h4>
+<table class="th-table"><tr><th>Type</th><th>Rule</th><th>Example</th></tr>
+<tr><td><b>Separable</b></td><td>Object can go between verb and particle</td><td>"Pick <b>up</b> Maria" OR "Pick Maria <b>up</b>" ✓</td></tr>
+<tr><td><b>Pronoun rule</b></td><td>Pronoun MUST go in the middle</td><td>"Pick <b>her</b> up" ✓ | "Pick up <b>her</b>" ✗</td></tr>
+<tr><td><b>Inseparable</b></td><td>Object always after the particle</td><td>"Run <b>out of</b> time" ✓</td></tr></table>
+<h3>2. Essential Phrasal Verbs</h3>
+<table class="th-table"><tr><th>Phrasal Verb</th><th>Meaning</th><th>Example</th></tr>
+<tr><td><b>set off</b></td><td>depart, start a journey</td><td>"We set off at dawn."</td></tr>
+<tr><td><b>head off</b></td><td>leave, go somewhere</td><td>"Let's head off before traffic starts."</td></tr>
+<tr><td><b>turn up</b></td><td>arrive (often unexpectedly)</td><td>"She turned up three hours late!"</td></tr>
+<tr><td><b>find out</b></td><td>discover information</td><td>"I found out the museum is free on Sundays."</td></tr>
+<tr><td><b>sort out</b></td><td>organise, solve</td><td>"I'll sort out the train tickets."</td></tr>
+<tr><td><b>run out of</b></td><td>have none left</td><td>"We ran out of cash."</td></tr>
+<tr><td><b>put up with</b></td><td>tolerate</td><td>"I can't put up with this noise!"</td></tr>
+<tr><td><b>look forward to</b></td><td>feel excited about sth future</td><td>"I'm looking forward to the concert!"</td></tr>
+<tr><td><b>pick up</b></td><td>collect / learn informally</td><td>"I picked up some Welsh on the trip."</td></tr>
+<tr><td><b>carry on</b></td><td>continue</td><td>"We carried on walking in the rain."</td></tr>
+<tr><td><b>open up</b></td><td>become more emotionally honest</td><td>"Therapy helped her open up."</td></tr>
+<tr><td><b>check in</b></td><td>register / check emotionally</td><td>"I check in with myself before going on stage."</td></tr></table>
+<div class="note-box">💡 <b>Tip from the Boss:</b> When learning phrasal verbs, always learn them in a sentence — not just as a list. Notice how Adele uses them naturally in the interview above!</div>`,
+ exercises:[
+  {id:'ex1',type:'match',title:'Phrasal Verb Meanings',skill:'lang',pts:8,
+   hint:'Review the phrasal verb table in Theory before starting.',
+   instr:'Match each phrasal verb with its correct meaning.',
+   opts:['depart, start a journey','discover information','organise or solve','have none left','tolerate something unpleasant','feel excited about something future','arrive (often unexpectedly)','continue'],
+   items:[
+    {def:'set off',ans:'depart, start a journey'},
+    {def:'find out',ans:'discover information'},
+    {def:'sort out',ans:'organise or solve'},
+    {def:'run out of',ans:'have none left'},
+    {def:'put up with',ans:'tolerate something unpleasant'},
+    {def:'look forward to',ans:'feel excited about something future'},
+    {def:'turn up',ans:'arrive (often unexpectedly)'},
+    {def:'carry on',ans:'continue'},
+   ]},
+  {id:'ex2',type:'sel-blanks',title:'Complete with a Phrasal Verb',skill:'lang',pts:6,
+   hint:'Use each phrasal verb from the bank only once. Check meaning carefully!',
+   instr:'Choose the correct phrasal verb from the word bank.',
+   bank:['headed off','sorted out','run out of','picked up','open up','carry on'],
+   items:[
+    {before:'We',ans:'headed off',after:'to the coast early to beat the crowds.'},
+    {before:'I',ans:'sorted out',after:'all the accommodation before leaving home.'},
+    {before:'Halfway through the trip, we',ans:'run out of',after:'cash and had to find an ATM.'},
+    {before:'I',ans:'picked up',after:'a few words of Welsh from the locals — they loved it!'},
+    {before:'Therapy helped her',ans:'open up',after:'about her anxiety for the first time.'},
+    {before:'Even when it started raining, we decided to',ans:'carry on',after:'walking along the coastal path.'},
+   ]},
+  {id:'ex3',type:'true-false',title:'Interview Comprehension',skill:'lang',pts:5,
+   hint:'Read the interview carefully. Pay attention to details — some statements are very close to the text but not quite accurate.',
+   instr:'True or False according to the interview with Adele?',
+   items:[
+    {q:'Adele grew up entirely in Tottenham throughout her childhood.',ans:'false'},
+    {q:'Adele almost did not attend the BRIT School.',ans:'true'},
+    {q:'Amy Winehouse studied at the BRIT School after Adele.',ans:'false'},
+    {q:'Adele had postnatal depression after the birth of her son.',ans:'true'},
+    {q:'Adele says she regrets becoming a musician.',ans:'false'},
+   ]},
+  {id:'ex4',type:'open-text',title:'Comprehension Questions',skill:'comm',pts:5,
+   instr:'Answer in full sentences based on the interview. Your teacher will correct these.',
+   items:[
+    {q:'How did growing up in South London influence Adele\'s music and personality?'},
+    {q:'What two mental health challenges does Adele mention in the interview?'},
+    {q:'Find THREE phrasal verbs in paragraphs [3] or [4] and explain the meaning of each in your own words.'},
+   ]},
+ ],
+ cfTitle:'Mission 5: Final Recommendation',
+ cfPrompt:'Write your final guide\'s recommendation for Ms. Taylor (5–6 sentences). Tell her why she is going to love the UK, what your highlights are, and what makes this trip special. Try to include at least TWO phrasal verbs and ONE future form.',
+ cfBullets:['Why Ms. Taylor will love the UK','Your personal highlights of the trip','At least 2 phrasal verbs','At least 1 future tense','A warm, professional final message'],
+ hasFinalBoss: true,
+},
+];
+
+// ══════════════════════════════════════════════════════════════
+//  STATE
+// ══════════════════════════════════════════════════════════════
+const state = {
+  student:{name:'',email:'',cls:'',date:''},
+  level:'standard',
+  current:1,
+  showingClientFile:false,
+  answers:{},
+  checked:{},
+  submitted:{},
+  scores:{},     // {mnum: {lang:0, ps:0, maxLang:0, maxPs:0}}
+  clientFile:{}, // {1:'', 2:'', 3:'', 4:'', 5:''}
+};
+
+function initState(){
+  SESSIONS.forEach(s=>{
+    if(!state.answers[s.num]) state.answers[s.num]={};
+    if(!state.checked[s.num]) state.checked[s.num]={};
+    if(!state.scores[s.num]) state.scores[s.num]=computeMaxScores(s);
+    s.exercises.forEach(ex=>{
+      if(!state.answers[s.num][ex.id]) state.answers[s.num][ex.id]={};
+      if(state.checked[s.num][ex.id]===undefined) state.checked[s.num][ex.id]=false;
+    });
+    if(!state.clientFile[s.num]) state.clientFile[s.num]='';
+  });
+}
+
+function computeMaxScores(s){
+  let maxLang=0, maxPs=0;
+  s.exercises.forEach(ex=>{
+    if(isAutoEx(ex)){
+      if(ex.skill==='lang') maxLang+=ex.pts;
+      if(ex.skill==='ps') maxPs+=ex.pts;
+    }
+  });
+  const existing = state.scores[s.num]||{};
+  return {lang:existing.lang||0, ps:existing.ps||0, maxLang, maxPs};
+}
+
+function isAutoEx(ex){ return ['match','sel-blanks','radio-mc','txt-blanks','true-false','decision'].includes(ex.type); }
+function getTotalXP(){ return SESSIONS.reduce((a,s)=>a+((state.scores[s.num]?(state.scores[s.num].lang||0)+(state.scores[s.num].ps||0):0)),0); }
+function getLangXP(){ return SESSIONS.reduce((a,s)=>a+(state.scores[s.num]?state.scores[s.num].lang||0:0),0); }
+function getPsXP(){ return SESSIONS.reduce((a,s)=>a+(state.scores[s.num]?state.scores[s.num].ps||0:0),0); }
+function getRank(xp){ return [...RANKS].reverse().find(r=>xp>=r.min)||RANKS[0]; }
+function removeAccents(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+
+// ══════════════════════════════════════════════════════════════
+//  ONBOARDING
+// ══════════════════════════════════════════════════════════════
+let obSlide=1; const OB_TOTAL=4;
+function obNext(){ if(obSlide>=OB_TOTAL) return; obGo(obSlide+1); }
+function obPrev(){ if(obSlide<=1) return; obGo(obSlide-1); }
+function obGo(n){
+  document.getElementById('ob-s'+obSlide).classList.remove('active');
+  obSlide=n;
+  document.getElementById('ob-s'+obSlide).classList.add('active');
+  document.querySelectorAll('.ob-dot').forEach((d,i)=>d.classList.toggle('active',i===obSlide-1));
+  document.getElementById('ob-nav').style.display=(obSlide===OB_TOTAL)?'none':'flex';
+}
+function enterApp(){
+  document.getElementById('onboarding').style.display='none';
+  document.getElementById('login').style.display='flex';
+}
+
+// ══════════════════════════════════════════════════════════════
+//  EMAIL VALIDATION
+// ══════════════════════════════════════════════════════════════
+function validateEmail(){
+  const email=document.getElementById('inp-email').value.trim().toLowerCase();
+  const warn=document.getElementById('email-warn');
+  const name=document.getElementById('inp-name').value.trim().toLowerCase();
+  warn.style.display='none';
+  if(!email) return;
+  if(!email.endsWith('@institutmatadepera.cat')){
+    warn.style.display='block';
+    warn.textContent='Please use your school email ending in @institutmatadepera.cat';
+    return;
+  }
+  if(name){
+    const prefix=email.split('@')[0];
+    const nameParts=removeAccents(name).toLowerCase().split(/\s+/).filter(p=>p.length>2);
+    const prefixClean=removeAccents(prefix);
+    const anyMatch=nameParts.some(part=>prefixClean.includes(part));
+    if(!anyMatch&&nameParts.length>0){
+      warn.style.display='block';
+      warn.textContent='Your name does not seem to match this email. Are you sure this is your school email? You can continue if it is correct.';
+    }
+  }
+}
+
+// ══════════════════════════════════════════════════════════════
+//  LOGIN
+// ══════════════════════════════════════════════════════════════
+async function tryLogin(){
+  const n=document.getElementById('inp-name').value.trim();
+  const e=document.getElementById('inp-email').value.trim().toLowerCase();
+  const c=document.getElementById('inp-class').value;
+  if(!n){alert('Please enter your full name.');return;}
+  if(!e||!e.endsWith('@institutmatadepera.cat')){alert('Please use your school email (@institutmatadepera.cat).');return;}
+  if(!c){alert('Please select your class group.');return;}
+  state.student.name=n; state.student.email=e; state.student.cls=c;
+  state.student.date=new Date().toLocaleDateString('en-GB');
+  document.getElementById('chip-name').textContent=n;
+  document.getElementById('chip-class').textContent=c;
+  const loading=document.getElementById('login-loading');
+  loading.style.display='block';
+  document.querySelector('.btn-start').disabled=true;
+  initState();
+  const saved=await loadProgress(e);
+  loading.style.display='none';
+  if(saved){
+    applyProgress(saved);
+    showResume();
+  } else {
+    document.getElementById('login').style.display='none';
+    launchApp();
+  }
+}
+
+// ══════════════════════════════════════════════════════════════
+//  SAVE / LOAD
+// ══════════════════════════════════════════════════════════════
+function saveProgress(){
+  const prog={found:true,name:state.student.name,group:state.student.cls,
+    answers:state.answers,checked:state.checked,submitted:state.submitted,
+    scores:state.scores,clientFile:state.clientFile,level:state.level};
+  try{ localStorage.setItem('ukguide4_'+state.student.email,JSON.stringify(prog)); }catch(e){}
+  debouncedSend(prog);
+}
+let _st=null;
+function debouncedSend(prog){ clearTimeout(_st); _st=setTimeout(()=>sendProgressToSheets(prog),3000); }
+
+async function loadProgress(email){
+  try{
+    const raw=localStorage.getItem('ukguide4_'+email);
+    if(raw){const d=JSON.parse(raw); if(d&&d.found) return d;}
+  }catch(e){}
+  if(!SHEETS_URL||SHEETS_URL==='YOUR_APPS_SCRIPT_URL_HERE') return null;
+  try{
+    const res=await fetch(`${SHEETS_URL}?action=load&email=${encodeURIComponent(email)}`);
+    const d=await res.json();
+    if(d&&d.found) return d;
+  }catch(e){}
+  return null;
+}
+
+function applyProgress(saved){
+  if(saved.level) state.level=saved.level;
+  if(saved.answers) Object.keys(saved.answers).forEach(k=>{ state.answers[k]=saved.answers[k]||{}; });
+  if(saved.checked) Object.keys(saved.checked).forEach(k=>{ state.checked[k]=saved.checked[k]||{}; });
+  if(saved.submitted) Object.keys(saved.submitted).forEach(k=>{ state.submitted[k]=saved.submitted[k]; });
+  if(saved.scores) Object.keys(saved.scores).forEach(k=>{ state.scores[k]=saved.scores[k]; });
+  if(saved.clientFile) Object.keys(saved.clientFile).forEach(k=>{ state.clientFile[k]=saved.clientFile[k]||''; });
+}
+
+function sendProgressToSheets(prog){
+  if(!SHEETS_URL||SHEETS_URL==='YOUR_APPS_SCRIPT_URL_HERE') return;
+  fetch(SHEETS_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},
+    body:JSON.stringify({action:'saveProgress',email:state.student.email,...prog})}).catch(()=>{});
+}
+
+function sendMissionToSheets(snum,rows){
+  if(!SHEETS_URL||SHEETS_URL==='YOUR_APPS_SCRIPT_URL_HERE'){
+    setStatus(snum,'error','No Google Sheets URL configured.');return;
+  }
+  setStatus(snum,'sending','<div class="spinner"></div> Sending to teacher…');
+  const s=SESSIONS.find(x=>x.num===snum);
+  const payload={action:'saveMission',email:state.student.email,student:state.student.name,
+    group:state.student.cls,date:state.student.date,session:snum,sessionTitle:s.title,
+    scores:state.scores[snum],totalXP:getTotalXP(),rank:getRank(getTotalXP()).title,
+    level:state.level,clientFile:state.clientFile[snum]||'',rows};
+  fetch(SHEETS_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},body:JSON.stringify(payload)})
+  .then(()=>{setStatus(snum,'sent','✓ Sent to teacher!');setTimeout(()=>setStatus(snum,''),4000);})
+  .catch(()=>{setStatus(snum,'error','Connection error.');});
+}
+function setStatus(snum,type,html=''){
+  const el=document.getElementById('sendst-'+snum);
+  if(!el) return;
+  el.className='send-status'+(type?' show '+type:'');
+  el.innerHTML=html;
+}
+
+// ══════════════════════════════════════════════════════════════
+//  RESUME SCREEN
+// ══════════════════════════════════════════════════════════════
+function showResume(){
+  document.getElementById('login').style.display='none';
+  const el=document.getElementById('resume');
+  el.style.display='flex';
+  document.getElementById('res-sub').textContent='Welcome back, '+state.student.name+'! Your progress has been loaded.';
+  const list=document.getElementById('res-missions');
+  list.innerHTML=SESSIONS.map(s=>{
+    const done=state.submitted[s.num];
+    const sc=state.scores[s.num];
+    const xp=sc?(sc.lang||0)+(sc.ps||0):0;
+    return '<div class="res-mission'+(done?' done':'')+'"><span class="rm-icon">'+(done?'✅':s.icon)+'</span><span class="rm-name">Mission '+s.num+': '+s.title+'</span>'+(done?'<span class="rm-xp">+'+xp+' XP</span>':'')+'</div>';
+  }).join('');
+}
+
+// ══════════════════════════════════════════════════════════════
+//  LAUNCH APP
+// ══════════════════════════════════════════════════════════════
+function launchApp(){
+  document.getElementById('resume').style.display='none';
+  document.getElementById('login').style.display='none';
+  document.getElementById('app').style.display='flex';
+  Object.keys(SHUFFLE_CACHE).forEach(k=>delete SHUFFLE_CACHE[k]); // clear so seed uses student email
+  buildSidebar(); renderAllSessions(); restoreState();
+  const firstOpen=SESSIONS.find(s=>!state.submitted[s.num]);
+  goTo(firstOpen?firstOpen.num:SESSIONS.length);
+}
+
+// ══════════════════════════════════════════════════════════════
+//  SIDEBAR
+// ══════════════════════════════════════════════════════════════
+function buildSidebar(){
+  document.getElementById('stabs').innerHTML=SESSIONS.map(s=>
+    '<div class="stab" id="stab-'+s.num+'" onclick="tryGoTo('+s.num+')">'+
+    '<div class="tab-icon">'+s.icon+'</div>'+
+    '<div class="tab-info"><div class="tab-name">'+s.title+'</div><div class="tab-num">Mission '+s.num+'</div></div>'+
+    '<div class="tab-xp" id="tabxp-'+s.num+'"></div></div>'
+  ).join('');
+}
+
+function updateSidebar(){
+  const xp=getTotalXP(); const lxp=getLangXP(); const pxp=getPsXP();
+  const rank=getRank(xp);
+  document.getElementById('tb-rank-ico').textContent=rank.icon;
+  document.getElementById('tb-rank-lbl').textContent=rank.title;
+  document.getElementById('tb-xp').textContent=xp;
+  document.getElementById('sb-rank-ico').textContent=rank.icon;
+  document.getElementById('sb-rank-name').textContent=rank.title;
+  document.getElementById('sb-xp-count').textContent=xp;
+  document.getElementById('sb-xp-fill').style.width=Math.min(100,xp)+'%';
+  document.getElementById('sb-next-rank').textContent=rank.next?'Next rank at '+rank.next+' XP':'🎉 Maximum rank reached!';
+  document.getElementById('sk-lang-val').textContent=lxp+' XP';
+  document.getElementById('sk-ps-val').textContent=pxp+' XP';
+  const commDone=SESSIONS.some(s=>state.submitted[s.num]&&s.exercises.some(ex=>ex.skill==='comm'));
+  document.getElementById('sk-comm-val').textContent=commDone?'Submitted':'Pending';
+  SESSIONS.forEach((s,i)=>{
+    const tab=document.getElementById('stab-'+s.num);
+    const xpEl=document.getElementById('tabxp-'+s.num);
+    const unlocked=i===0||state.submitted[SESSIONS[i-1].num];
+    tab.className='stab'+(s.num===state.current&&!state.showingClientFile?' active':'')+(state.submitted[s.num]?' done':'')+(unlocked?'':' locked');
+    if(state.submitted[s.num]){
+      const sc=state.scores[s.num];
+      xpEl.textContent='+'+(sc?(sc.lang||0)+(sc.ps||0):0)+' XP';
+    } else xpEl.textContent='';
+  });
+  const cfTab=document.getElementById('stab-cf');
+  if(cfTab) cfTab.className='stab'+(state.showingClientFile?' active':'');
+}
+
+function tryGoTo(n){
+  const idx=SESSIONS.findIndex(s=>s.num===n);
+  if(idx>0&&!state.submitted[SESSIONS[idx-1].num]){
+    alert('Complete Mission '+(SESSIONS[idx-1].num)+' first to unlock this one!');
+    return;
+  }
+  goTo(n);
+}
+
+function goTo(n){
+  state.current=n; state.showingClientFile=false;
+  document.querySelectorAll('.session-wrap').forEach(el=>el.classList.remove('active'));
+  document.getElementById('sw-'+n).classList.add('active');
+  document.getElementById('content-area').style.display='';
+  document.getElementById('cf-page').style.display='none';
+  applyMissionColor(n);
+  updateSidebar(); window.scrollTo(0,0);
+}
+
+function showClientFile(){
+  state.showingClientFile=true;
+  document.querySelectorAll('.session-wrap').forEach(el=>el.classList.remove('active'));
+  document.getElementById('content-area').style.display='none';
+  document.getElementById('cf-page').style.display='block';
+  renderClientFilePage();
+  updateSidebar(); window.scrollTo(0,0);
+}
+
+function applyMissionColor(n){
+  const c=MISSION_COLORS[n]||MISSION_COLORS[1];
+  document.documentElement.style.setProperty('--accent',c.accent);
+  document.documentElement.style.setProperty('--accent-bg',c.bg);
+  document.documentElement.style.setProperty('--accent-border',c.border);
+}
+
+// ══════════════════════════════════════════════════════════════
+//  RENDER SESSIONS
+// ══════════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════════════════
+//  SHUFFLE HELPERS (deterministic per student)
+// ══════════════════════════════════════════════════════════════
+const SHUFFLE_CACHE={};
+
+function strHash(s){
+  let h=0;
+  for(let i=0;i<s.length;i++) h=Math.imul(31,h)+s.charCodeAt(i)|0;
+  return Math.abs(h);
+}
+
+function seededShuffle(arr,seed){
+  const a=[...arr];
+  for(let i=a.length-1;i>0;i--){
+    const j=Math.abs((seed*(i+13)+i*7)^(seed>>3))%(i+1);
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+
+// Returns shuffled array of original indices for radio-mc options
+function getShuffledRadioOpts(snum,exid,itemIdx,numOpts){
+  const key=snum+'_'+exid+'_'+itemIdx;
+  if(!SHUFFLE_CACHE[key]){
+    const seed=strHash(state.student.email+key);
+    SHUFFLE_CACHE[key]=seededShuffle([...Array(numOpts).keys()],seed);
+  }
+  return SHUFFLE_CACHE[key];
+}
+
+// Returns shuffled match opts (text array)
+function getShuffledMatchOpts(snum,exid,opts){
+  const key=snum+'_'+exid+'_matchopts';
+  if(!SHUFFLE_CACHE[key]){
+    const seed=strHash(state.student.email+key);
+    SHUFFLE_CACHE[key]=seededShuffle([...opts],seed);
+  }
+  return SHUFFLE_CACHE[key];
+}
+
+function renderAllSessions(){
+  document.getElementById('content-area').innerHTML=SESSIONS.map(renderSession).join('');
+}
+
+function renderSession(s){
+  const ytCard=(id,title)=>'<a class="yt-card" href="https://www.youtube.com/watch?v='+id+'" target="_blank" rel="noopener"><div class="yt-play">▶</div><div class="yt-info"><div class="yt-label">Watch on YouTube</div><div class="yt-title">'+title+'</div><div class="yt-sub">Click to open in a new tab</div></div></a>';
+  const yt1=s.youtubeId1?ytCard(s.youtubeId1,s.youtubeTitle1):'';
+  const yt2=s.youtubeId2?ytCard(s.youtubeId2,s.youtubeTitle2):'';
+  const maxAuto=s.exercises.filter(ex=>isAutoEx(ex)).reduce((a,ex)=>a+ex.pts,0);
+  const maxTeacher=s.exercises.filter(ex=>ex.type==='open-text'||ex.type==='writing').reduce((a,ex)=>a+(ex.pts||0),0);
+
+  let h='<div class="session-wrap" id="sw-'+s.num+'">';
+  // Boss message
+  h+='<div class="boss-card"><div class="boss-avatar">👔</div><div class="boss-content"><div class="boss-label">📋 Message from The Boss</div><div class="boss-text">'+s.bossMsg+'</div></div></div>';
+  // Banner
+  h+='<div class="mission-banner"><img class="mission-img" src="'+s.image+'" alt="'+s.imageAlt+'" loading="lazy" onerror="this.style.display=\'none\'"><div class="mission-intro"><div class="snum">Mission '+s.num+' of '+SESSIONS.length+'</div><div class="stitle">'+s.icon+' '+s.title+'</div><div class="sdesc">'+s.intro+'</div></div></div>';
+  // Theory
+  if(s.theory) h+='<div class="theory-box open" onclick="toggleTheory(this)"><div class="th-hdr"><div class="th-hdr-l">📘 Theory &amp; Reference — click to expand/collapse</div><div class="th-chevron">▼</div></div><div class="th-body">'+s.theory+'</div></div>';
+  // Reading (M5)
+  if(s.reading) h+='<div class="rtext">'+s.reading+'</div>';
+  // Music box
+  h+='<div class="music-box"><div>🎵 '+s.musicText+'</div>'+(yt1||yt2?'<div class="yt-cards">'+yt1+yt2+'</div>':'')+'</div>';
+  // Exercises
+  s.exercises.forEach((ex,i)=>{ h+=renderExercise(s.num,ex,i+1); });
+  // Client File task
+  h+=renderClientFileTask(s);
+  // Footer
+  h+='<div class="sfooter"><button class="btn-quest" id="sub-'+s.num+'" onclick="completeMission('+s.num+')" disabled>⚔️ Complete Mission '+s.num+'</button><span class="mission-status" id="mstatus-'+s.num+'"></span><div class="send-status" id="sendst-'+s.num+'"></div>'+(s.num<SESSIONS.length?'<button class="btn-nxt" id="nxt-'+s.num+'" onclick="tryGoTo('+(s.num+1)+')">Next mission →</button>':'')+'</div>';
+  // Mission complete card
+  h+='<div class="mission-complete" id="mc-'+s.num+'"><div class="mc-header"><span class="mc-icon">🏆</span><div><div class="mc-title">Mission '+s.num+' Complete!</div><div class="mc-subtitle">'+s.title+'</div></div></div>';
+  h+='<div class="mc-stats"><div class="mc-stat"><div class="mc-stat-val xpv" id="mc-xp-'+s.num+'">+0</div><div class="mc-stat-lbl">XP Earned</div></div><div class="mc-stat"><div class="mc-stat-val autov" id="mc-auto-'+s.num+'">0/'+maxAuto+'</div><div class="mc-stat-lbl">Auto Score</div></div><div class="mc-stat"><div class="mc-stat-val totv" id="mc-tot-'+s.num+'">0</div><div class="mc-stat-lbl">Total XP</div></div></div>';
+  h+='<div class="mc-skills"><span class="mc-skill-chip sk-lang" id="mc-sk-lang-'+s.num+'">🧠 Lang: 0</span><span class="mc-skill-chip sk-ps" id="mc-sk-ps-'+s.num+'">🧩 PS: 0</span>'+(maxTeacher>0?'<span class="mc-skill-chip sk-comm">🗣️ +'+maxTeacher+' pts teacher</span>':'')+'</div>';
+  h+='<div class="mc-rank-row"><span id="mc-rico-'+s.num+'">🎫</span>&nbsp;<span style="color:var(--muted);font-size:.85rem">Rank: <b id="mc-rname-'+s.num+'" style="color:var(--gold)">Rookie</b></span></div>';
+  h+='<div id="mc-rankup-'+s.num+'"></div>';
+  h+='<div class="mc-cf-remind">📁 Don\'t forget to fill in your <b>Client File entry</b> above before moving to the next mission!</div>';
+  h+='</div>';
+  // Final Boss
+  if(s.hasFinalBoss) h+=renderFinalBoss();
+  h+='</div>';
+  return h;
+}
+
+function renderExercise(snum,ex,num){
+  const c=MISSION_COLORS[snum]||MISSION_COLORS[1];
+  const skillTag=ex.skill==='lang'?'<span class="skill-tag sk-lang">🧠 Language</span>':ex.skill==='ps'?'<span class="skill-tag sk-ps">🧩 Problem Solving</span>':'<span class="skill-tag sk-comm">🗣️ Communication</span>';
+  const isAuto=isAutoEx(ex);
+  const xpLabel=isAuto?'<span class="ex-xp">⚡ '+ex.pts+' XP</span>':'<span class="ex-teacher">📝 Teacher-graded</span>';
+  const showHint=state.level==='basic';
+  const hintHtml=ex.hint?'<div class="hint-box'+(showHint?' show':'')+'">💡 <b>Hint:</b> '+ex.hint+'</div>'+(state.level==='standard'?'<button class="hint-toggle" onclick="toggleHint(this)">💡 Show hint</button>':''):'';
+  let body='';
+
+  if(ex.type==='match'){
+    const sOpts=getShuffledMatchOpts(snum,ex.id,ex.opts);
+    body='<table class="match-table">'+ex.items.map((it,i)=>
+      '<tr><td class="match-def"><span>'+(i+1)+'.</span><b>'+it.def+'</b></td><td>'+
+      '<select class="ans-sel" id="'+snum+'_'+ex.id+'_'+i+'" onchange="saveAns('+snum+',\''+ex.id+'\','+i+',this.value)">'+
+      '<option value="">– choose –</option>'+sOpts.map(o=>'<option value="'+o+'">'+o+'</option>').join('')+
+      '</select><span id="fb_'+snum+'_'+ex.id+'_'+i+'"></span></td></tr>'
+    ).join('')+'</table>';
+  } else if(ex.type==='sel-blanks'){
+    body='<div class="wbank">'+ex.bank.map(w=>'<span class="wchip">'+w+'</span>').join('')+'</div>';
+    body+=ex.items.map((it,i)=>{
+      const sBankKey=snum+'_'+ex.id+'_sbank';
+      if(!SHUFFLE_CACHE[sBankKey]){
+        const seed=strHash(state.student.email+sBankKey);
+        SHUFFLE_CACHE[sBankKey]=seededShuffle([...ex.bank],seed);
+      }
+      const sBank=SHUFFLE_CACHE[sBankKey];
+      return '<div class="qitem"><div class="fsent"><span style="color:var(--muted);font-weight:600">'+(i+1)+'.</span>'+
+        (it.before?'<span>'+it.before+'</span>':'')+
+        '<select class="ans-sel" id="'+snum+'_'+ex.id+'_'+i+'" onchange="saveAns('+snum+',\''+ex.id+'\','+i+',this.value)">'+
+        '<option value="">___</option>'+sBank.map(w=>'<option value="'+w+'">'+w+'</option>').join('')+
+        '</select>'+(it.after?'<span>'+it.after+'</span>':'')+
+        '<span id="fb_'+snum+'_'+ex.id+'_'+i+'"></span></div></div>';
+    }).join('');
+  } else if(ex.type==='radio-mc'){
+    body=ex.items.map((it,i)=>{
+      const sIdx=getShuffledRadioOpts(snum,ex.id,i,it.opts.length);
+      return '<div class="qitem" id="qitem_'+snum+'_'+ex.id+'_'+i+'">'+
+        '<div class="qtxt"><strong>'+(i+1)+'.</strong> '+it.q+'</div>'+
+        '<div class="opts">'+sIdx.map((origIdx,dispPos)=>'<label class="opt" id="opt_'+snum+'_'+ex.id+'_'+i+'_'+origIdx+'">'+
+          '<input type="radio" name="r_'+snum+'_'+ex.id+'_'+i+'" value="'+origIdx+'" onchange="saveAns('+snum+',\''+ex.id+'\','+i+','+origIdx+')">'+
+          '<span>'+String.fromCharCode(65+dispPos)+'. '+it.opts[origIdx]+'</span></label>').join('')+'</div></div>';
+    }).join('');
+  } else if(ex.type==='txt-blanks'){
+    body=ex.items.map((it,i)=>'<div class="qitem"><div class="fsent">'+
+      '<span style="color:var(--muted);font-weight:600">'+(i+1)+'.</span><span>'+it.before+'</span>'+
+      '<strong style="color:var(--muted);font-size:.78rem;margin:0 .15rem">'+it.verb+'</strong>'+
+      '<input class="ans-inp" id="'+snum+'_'+ex.id+'_'+i+'" type="text" placeholder="…" oninput="saveAns('+snum+',\''+ex.id+'\','+i+',this.value)">'+
+      '<span>'+it.after+'</span><span id="fb_'+snum+'_'+ex.id+'_'+i+'"></span></div>'+
+      '<div class="correct-hint" id="hint_'+snum+'_'+ex.id+'_'+i+'" style="display:none"></div></div>'
+    ).join('');
+  } else if(ex.type==='true-false'){
+    body=ex.items.map((it,i)=>'<div class="qitem">'+
+      '<div class="qtxt"><strong>'+(i+1)+'.</strong> '+it.q+'</div>'+
+      '<div class="tf-row">'+
+      '<button class="tf-btn" id="tf_'+snum+'_'+ex.id+'_'+i+'_t" onclick="saveTF('+snum+',\''+ex.id+'\','+i+',\'true\')">✓ True</button>'+
+      '<button class="tf-btn" id="tf_'+snum+'_'+ex.id+'_'+i+'_f" onclick="saveTF('+snum+',\''+ex.id+'\','+i+',\'false\')">✗ False</button>'+
+      '<span id="fb_'+snum+'_'+ex.id+'_'+i+'"></span></div></div>'
+    ).join('');
+  } else if(ex.type==='open-text'){
+    body='<p style="font-size:.78rem;color:var(--gold);margin-bottom:.85rem">📝 Your teacher will read and grade these answers.</p>';
+    body+=ex.items.map((it,i)=>'<div class="qitem"><div class="qtxt"><strong>'+(i+1)+'.</strong> '+it.q+'</div>'+
+      '<textarea class="open-inp" id="'+snum+'_'+ex.id+'_'+i+'" rows="3" placeholder="Write your answer here…" oninput="saveAns('+snum+',\''+ex.id+'\','+i+',this.value)"></textarea></div>'
+    ).join('');
+  } else if(ex.type==='decision'){
+    body='<div class="decision-scene">'+
+      '<div class="char-bubble"><div class="char-avatar">'+ex.charEmoji+'</div>'+
+      '<div class="char-info"><div class="char-name">'+ex.charName+'</div>'+
+      '<div class="char-text">'+ex.scenario+'</div></div></div>'+
+      '<div class="dec-options">'+ex.options.map((o,oi)=>
+        '<button class="dec-btn" id="dec_'+snum+'_'+ex.id+'_'+oi+'" onclick="chooseOption('+snum+',\''+ex.id+'\','+oi+')">'+
+        '<span class="dec-letter">'+String.fromCharCode(65+oi)+'</span><span>'+o.text+'</span></button>'
+      ).join('')+'</div>'+
+      '<div class="dec-feedback" id="decfb_'+snum+'_'+ex.id+'"></div>'+
+      '</div>';
+  } else if(ex.type==='writing'){
+    body='<div class="checklist">'+ex.prompts.map(p=>'<span class="ck-item">✦ '+p+'</span>').join('')+'</div><br>'+
+      '<textarea class="writing-area" id="'+snum+'_'+ex.id+'_0" placeholder="Start writing here…" oninput="saveAns('+snum+',\''+ex.id+'\',0,this.value)"></textarea>'+
+      '<p style="font-size:.78rem;color:var(--gold);margin-top:.6rem">📝 Your teacher will read this and give you detailed feedback.</p>';
+  }
+
+  const footerBtn=isAuto?
+    '<button class="btn-check" id="chk_'+snum+'_'+ex.id+'" onclick="checkExercise('+snum+',\''+ex.id+'\')">✓ Check Exercise</button>':
+    (ex.type!=='writing'&&ex.type!=='decision'?'<button class="btn-save-open" id="chk_'+snum+'_'+ex.id+'" onclick="saveOpenExercise('+snum+',\''+ex.id+'\')">💾 Save Answers</button>':'');
+
+  return '<div class="exblock" id="exblock_'+snum+'_'+ex.id+'">'+
+    '<div class="ex-hdr">'+
+    '<span class="ex-badge" style="background:'+c.accent+'">EX '+num+'</span>'+
+    '<span class="ex-title">'+ex.title+'</span>'+
+    skillTag+xpLabel+'</div>'+
+    '<div class="ex-body">'+
+    hintHtml+
+    (ex.quickRef?'<div class="quick-ref"><b>📌 Key rule:</b> '+ex.quickRef+'</div>':'')+
+    '<p class="ex-instr">'+ex.instr+'</p>'+
+    body+
+    '<div class="ex-footer">'+footerBtn+'<span class="check-result" id="res_'+snum+'_'+ex.id+'"></span></div>'+
+    '</div></div>';
+}
+
+// ── Client File Task ────────────────────────────────────────
+function renderClientFileTask(s){
+  return '<div class="client-file-task">'+
+    '<div class="cf-header"><div class="cf-icon">📁</div><div class="cf-title-wrap">'+
+    '<div class="cf-label">Guide Task — Client File</div>'+
+    '<div class="cf-title">'+s.cfTitle+'</div></div></div>'+
+    '<div class="cf-prompt">'+s.cfPrompt+'</div>'+
+    '<div class="cf-prompts">'+s.cfBullets.map(b=>'<span class="cf-bullet">✦ '+b+'</span>').join('')+'</div>'+
+    '<textarea class="cf-textarea" id="cf_'+s.num+'" placeholder="Write your entry here…" oninput="saveCF('+s.num+',this.value)">'+escHtml(state.clientFile[s.num]||'')+'</textarea>'+
+    '</div>';
+}
+
+function escHtml(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+// ── Final Boss ─────────────────────────────────────────────
+function renderFinalBoss(){
+  return '<div class="final-boss">'+
+    '<div class="fb-header"><span class="fb-icon">🎥</span>'+
+    '<div><div class="fb-title">Final Boss: Elite Guide Video</div>'+
+    '<div class="fb-sub">Your ultimate challenge — prove you are ready!</div></div></div>'+
+    '<div class="fb-body">You have completed all 5 missions. Now it is time to bring everything together. Record a <b>2–3 minute video</b> presenting Ms. Taylor\'s complete UK trip guide, using your Client File as your script.<br><br>Your teacher will evaluate your speaking, your language use, and your content. This is your chance to show everything you have learned!</div>'+
+    '<div class="fb-checklist">'+
+    ['Introduction: who you are and what you will present','UK Essentials: key places to visit (from Mission 1)','Travel Plan: your one-day itinerary (from Mission 2)','Advice: your recommendations with conditionals (from Mission 3)','Lessons Learned: what to do when things go wrong (from Mission 4)','Final Recommendation: why Ms. Taylor will love the UK (from Mission 5)'].map((t,i)=>
+      '<div class="fb-check"><span class="fbc-num">'+(i+1)+'</span><span>'+t+'</span></div>'
+    ).join('')+'</div>'+
+    '<div class="quick-ref"><b>📌 Language checklist for the video:</b> Use at least 2 phrasal verbs · 1 future form · 1 conditional · 1 regret structure (should have / I wish)</div>'+
+    '</div>';
+}
+
+// ══════════════════════════════════════════════════════════════
+//  INTERACTIONS
+// ══════════════════════════════════════════════════════════════
+function saveAns(snum,exid,qi,val){
+  if(!state.answers[snum]) state.answers[snum]={};
+  if(!state.answers[snum][exid]) state.answers[snum][exid]={};
+  state.answers[snum][exid][qi]=val;
+}
+function saveTF(snum,exid,qi,val){
+  saveAns(snum,exid,qi,val);
+  if(!state.checked[snum]?.[exid]){
+    const tb=document.getElementById('tf_'+snum+'_'+exid+'_'+qi+'_t');
+    const fb=document.getElementById('tf_'+snum+'_'+exid+'_'+qi+'_f');
+    if(tb) tb.className='tf-btn'+(val==='true'?' sel-t':'');
+    if(fb) fb.className='tf-btn'+(val==='false'?' sel-f':'');
+  }
+}
+function saveCF(mnum,val){
+  state.clientFile[mnum]=val;
+  saveProgress();
+}
+function toggleTheory(el){ el.classList.toggle('open'); }
+function toggleHint(btn){
+  const box=btn.previousElementSibling;
+  if(!box) return;
+  box.classList.toggle('show');
+  btn.style.display='none';
+}
+
+// ── Choose Decision Option ────────────────────────────────
+function chooseOption(snum,exid,optIdx){
+  const s=SESSIONS.find(x=>x.num===snum);
+  const ex=s.exercises.find(e=>e.id===exid);
+  if(!ex||state.checked[snum]?.[exid]) return;
+  saveAns(snum,exid,0,optIdx);
+  // Disable all buttons
+  ex.options.forEach((_,i)=>{ const b=document.getElementById('dec_'+snum+'_'+exid+'_'+i); if(b) b.disabled=true; });
+  // Highlight chosen
+  const chosen=document.getElementById('dec_'+snum+'_'+exid+'_'+optIdx);
+  const opt=ex.options[optIdx];
+  if(chosen) chosen.classList.add(opt.best?'chosen-best':'chosen-bad');
+  // Reveal best if wrong
+  if(!opt.best){
+    const bestIdx=ex.options.findIndex(o=>o.best);
+    const bestBtn=document.getElementById('dec_'+snum+'_'+exid+'_'+bestIdx);
+    if(bestBtn) bestBtn.classList.add('reveal-best');
+  }
+  // Show feedback
+  const fb=document.getElementById('decfb_'+snum+'_'+exid);
+  if(fb){
+    fb.className='dec-feedback show '+(opt.best?'good':'bad');
+    fb.innerHTML=(opt.best?'✅':'❌')+' <b>'+(opt.best?'Great decision!':'Not the best choice.')+'</b> '+opt.outcome+(opt.best?'<br><b>+'+opt.xp+' Problem Solving XP!</b>':'<br>'+opt.xp+' XP earned.');
+  }
+  // Award XP
+  if(!state.scores[snum]) state.scores[snum]=computeMaxScores(s);
+  if(!state.scores[snum]._byEx) state.scores[snum]._byEx={};
+  state.scores[snum]._byEx[exid]=opt.xp;
+  state.scores[snum].ps=(state.scores[snum].ps||0)+opt.xp;
+  state.checked[snum][exid]=true;
+  document.getElementById('exblock_'+snum+'_'+exid)?.classList.add('ex-done');
+  const chkBtn=document.getElementById('chk_'+snum+'_'+exid);
+  if(chkBtn) chkBtn.style.display='none';
+  const resEl=document.getElementById('res_'+snum+'_'+exid);
+  if(resEl){ resEl.className='check-result good'; resEl.textContent=opt.best?'✓ Best choice! +'+opt.xp+' PS XP':'✓ Checked — '+opt.xp+' XP earned'; }
+  saveProgress(); updateSubmitButton(snum); updateSidebar();
+}
+
+// ── Check Auto Exercise ───────────────────────────────────
+function checkExercise(snum,exid,restoreMode=false){
+  const s=SESSIONS.find(x=>x.num===snum);
+  const ex=s.exercises.find(e=>e.id===exid);
+  if(!ex||ex.type==='decision') return;
+  let score=0;
+  ex.items.forEach((it,i)=>{
+    const userVal=state.answers[snum]?.[exid]?.[i]||'';
+    const fbEl=document.getElementById('fb_'+snum+'_'+exid+'_'+i);
+    let correct=false;
+    if(ex.type==='match'||ex.type==='sel-blanks'){
+      const sel=document.getElementById(snum+'_'+exid+'_'+i);
+      if(sel){sel.disabled=true; sel.value=userVal;}
+      correct=(userVal===it.ans);
+      if(sel) sel.className='ans-sel '+(correct?'ok':'ko');
+      if(fbEl) fbEl.innerHTML=correct?'<span class="fb ok">✓</span>':'<span class="fb ko">✗ '+it.ans+'</span>';
+    } else if(ex.type==='radio-mc'){
+      const chosen=parseInt(state.answers[snum]?.[exid]?.[i]);
+      document.querySelectorAll('input[name="r_'+snum+'_'+exid+'_'+i+'"]').forEach(r=>{r.disabled=true; if(r.value==chosen) r.checked=true;});
+      correct=(chosen===it.ans);
+      it.opts.forEach((_,oi)=>{
+        const lbl=document.getElementById('opt_'+snum+'_'+exid+'_'+i+'_'+oi);
+        if(!lbl) return;
+        if(oi===it.ans) lbl.classList.add('c-ans');
+        else if(oi===chosen&&!correct) lbl.classList.add('w-ans');
+      });
+    } else if(ex.type==='txt-blanks'){
+      const inp=document.getElementById(snum+'_'+exid+'_'+i);
+      if(inp){inp.disabled=true; inp.value=userVal;}
+      const uv=(userVal||'').trim().toLowerCase();
+      correct=it.ans.some(a=>a.toLowerCase()===uv);
+      if(inp) inp.className='ans-inp '+(correct?'ok':'ko');
+      if(fbEl) fbEl.innerHTML=correct?'<span class="fb ok">✓</span>':'<span class="fb ko">✗</span>';
+      const hEl=document.getElementById('hint_'+snum+'_'+exid+'_'+i);
+      if(hEl&&!correct){hEl.textContent='✓ Correct: '+it.ans[0]; hEl.style.display='block';}
+    } else if(ex.type==='true-false'){
+      const uv=state.answers[snum]?.[exid]?.[i];
+      correct=(uv===it.ans);
+      const tb=document.getElementById('tf_'+snum+'_'+exid+'_'+i+'_t');
+      const fb2=document.getElementById('tf_'+snum+'_'+exid+'_'+i+'_f');
+      if(tb){tb.disabled=true; tb.className='tf-btn'+(uv==='true'?' sel-t':'');}
+      if(fb2){fb2.disabled=true; fb2.className='tf-btn'+(uv==='false'?' sel-f':'');}
+      if(it.ans==='true'&&tb) tb.classList.add('rev-ok'); else if(fb2) fb2.classList.add('rev-ok');
+      if(!correct&&uv==='true'&&tb) tb.classList.add('rev-ko');
+      if(!correct&&uv==='false'&&fb2) fb2.classList.add('rev-ko');
+      if(fbEl) fbEl.innerHTML=correct?'<span class="fb ok">✓</span>':'<span class="fb ko">✗ '+(it.ans==='true'?'True':'False')+'</span>';
+    }
+    if(correct) score++;
+  });
+  // Update scores
+  if(!state.scores[snum]) state.scores[snum]=computeMaxScores(s);
+  if(!state.scores[snum]._byEx) state.scores[snum]._byEx={};
+  state.scores[snum]._byEx[exid]=score;
+  if(ex.skill==='lang') state.scores[snum].lang=Object.entries(state.scores[snum]._byEx).reduce((a,[k,v])=>{ const e=s.exercises.find(x=>x.id===k); return a+(e&&e.skill==='lang'?v:0); },0);
+  if(ex.skill==='ps') state.scores[snum].ps=Object.entries(state.scores[snum]._byEx).reduce((a,[k,v])=>{ const e=s.exercises.find(x=>x.id===k); return a+(e&&e.skill==='ps'?v:0); },0);
+  state.checked[snum][exid]=true;
+  document.getElementById('exblock_'+snum+'_'+exid)?.classList.add('ex-done');
+  const chkBtn=document.getElementById('chk_'+snum+'_'+exid);
+  if(chkBtn) chkBtn.style.display='none';
+  const resEl=document.getElementById('res_'+snum+'_'+exid);
+  if(resEl){resEl.className='check-result good'; resEl.textContent='✓ Done — '+score+'/'+ex.pts+' XP earned';}
+  if(!restoreMode){saveProgress(); updateSubmitButton(snum); updateSidebar();}
+  return score;
+}
+
+function saveOpenExercise(snum,exid){
+  const s=SESSIONS.find(x=>x.num===snum);
+  const ex=s.exercises.find(e=>e.id===exid);
+  if(!ex) return;
+  ex.items.forEach((_,i)=>{ const el=document.getElementById(snum+'_'+exid+'_'+i); if(el) el.disabled=true; });
+  state.checked[snum][exid]=true;
+  document.getElementById('exblock_'+snum+'_'+exid)?.classList.add('ex-done');
+  const chkBtn=document.getElementById('chk_'+snum+'_'+exid);
+  if(chkBtn) chkBtn.style.display='none';
+  const resEl=document.getElementById('res_'+snum+'_'+exid);
+  if(resEl){resEl.className='check-result saved'; resEl.textContent='📝 Saved — your teacher will grade this.';}
+  saveProgress(); updateSubmitButton(snum);
+}
+
+function updateSubmitButton(snum){
+  const s=SESSIONS.find(x=>x.num===snum);
+  if(!s) return;
+  const allChecked=s.exercises.every(ex=>state.checked[snum]?.[ex.id]);
+  const btn=document.getElementById('sub-'+snum);
+  const status=document.getElementById('mstatus-'+snum);
+  if(state.submitted[snum]){if(btn) btn.style.display='none'; return;}
+  if(btn) btn.disabled=!allChecked;
+  if(status){
+    const done=s.exercises.filter(ex=>state.checked[snum]?.[ex.id]).length;
+    const total=s.exercises.length;
+    status.textContent=allChecked?'All exercises done! Click to submit.':'('+done+'/'+total+' exercises checked)';
+  }
+}
+
+// ══════════════════════════════════════════════════════════════
+//  COMPLETE MISSION
+// ══════════════════════════════════════════════════════════════
+function completeMission(snum){
+  const s=SESSIONS.find(x=>x.num===snum);
+  const prevXP=getTotalXP(); const prevRank=getRank(prevXP);
+  state.submitted[snum]=true;
+  document.getElementById('sub-'+snum).style.display='none';
+  document.getElementById('mstatus-'+snum).textContent='';
+  const newXP=getTotalXP(); const rank=getRank(newXP);
+  const sc=state.scores[snum]||{lang:0,ps:0};
+  const mxp=(sc.lang||0)+(sc.ps||0);
+  const mc=document.getElementById('mc-'+snum);
+  mc.classList.add('show');
+  document.getElementById('mc-xp-'+snum).textContent='+'+mxp;
+  document.getElementById('mc-auto-'+snum).textContent=mxp+'/'+((sc.maxLang||0)+(sc.maxPs||0));
+  document.getElementById('mc-tot-'+snum).textContent=newXP;
+  document.getElementById('mc-rico-'+snum).textContent=rank.icon;
+  document.getElementById('mc-rname-'+snum).textContent=rank.title;
+  document.getElementById('mc-sk-lang-'+snum).textContent='🧠 Lang: '+(sc.lang||0);
+  document.getElementById('mc-sk-ps-'+snum).textContent='🧩 PS: '+(sc.ps||0);
+  if(rank.title!==prevRank.title){
+    document.getElementById('mc-rankup-'+snum).innerHTML='<div class="rank-up-msg">🎉 RANK UP! You are now a '+rank.icon+' <b>'+rank.title+'</b>!</div>';
+  }
+  const nxt=document.getElementById('nxt-'+snum);
+  if(nxt) nxt.classList.add('show');
+  // Collect rows for teacher
+  const allRows=[];
+  s.exercises.forEach((ex,ei)=>{
+    if(ex.type==='decision'){
+      const chosen=state.answers[snum]?.[ex.id]?.[0];
+      const opt=typeof chosen!=='undefined'?ex.options[chosen]:null;
+      allRows.push({exercise:'Ex '+(ei+1)+': '+ex.title,qNum:1,question:ex.scenario,answer:opt?opt.text:'(no answer)',correct:ex.options.find(o=>o.best)?.text||'',result:opt?(opt.best?'Best choice':'Not best'):'Not answered',pts:opt?opt.xp:0});
+    } else {
+      ex.items.forEach((it,i)=>{
+        const val=state.answers[snum]?.[ex.id]?.[i]||'';
+        const qtext=it.q||it.def||(it.before?(it.before+" ___ "+it.after):"")||"Writing task";
+        let correct='',result='';
+        if(ex.type==='match'||ex.type==='sel-blanks'){correct=it.ans;result=val===it.ans?'Correct':'Wrong';}
+        else if(ex.type==='radio-mc'){correct=it.opts[it.ans];const c=parseInt(val);result=c===it.ans?'Correct':'Wrong';}
+        else if(ex.type==='txt-blanks'){correct=it.ans[0];const uv=(val||'').trim().toLowerCase();result=it.ans.some(a=>a.toLowerCase()===uv)?'Correct':'Wrong';}
+        else if(ex.type==='true-false'){correct=it.ans;result=val===it.ans?'Correct':'Wrong';}
+        else{correct='Open';result='Pending teacher';}
+        allRows.push({exercise:'Ex '+(ei+1)+': '+ex.title,qNum:i+1,question:qtext,answer:val||'(no answer)',correct,result,pts:''});
+      });
+    }
+  });
+  saveProgress();
+  sendMissionToSheets(snum,allRows);
+  updateSidebar();
+}
+
+// ══════════════════════════════════════════════════════════════
+//  CLIENT FILE PAGE
+// ══════════════════════════════════════════════════════════════
+function renderClientFilePage(){
+  const entries=document.getElementById('cf-entries');
+  entries.innerHTML=SESSIONS.map(s=>{
+    const content=state.clientFile[s.num]||'';
+    return '<div class="cf-entry"><div class="cf-entry-hdr"><span class="cf-entry-num">'+s.icon+' MISSION '+s.num+'</span><span class="cf-entry-title">'+s.cfTitle+'</span></div>'+
+      (content?'<div class="cf-entry-body">'+escHtml(content)+'</div>':'<div class="cf-entry-empty">Not written yet. Complete Mission '+s.num+' to unlock this section.</div>')+
+      '</div>';
+  }).join('');
+}
+
+function downloadClientFile(){
+  let text='UK GUIDE AGENCY — CLIENT FILE\n';
+  text+='Guide: '+state.student.name+' | Group: '+state.student.cls+' | Date: '+state.student.date+'\n';
+  text+='═'.repeat(50)+'\n\n';
+  SESSIONS.forEach(s=>{
+    text+=s.icon+' '+s.cfTitle.toUpperCase()+'\n'+'─'.repeat(40)+'\n';
+    text+=(state.clientFile[s.num]||'(not written yet)')+'\n\n';
+  });
+  text+='═'.repeat(50)+'\n';
+  text+='Total XP: '+getTotalXP()+'/100 · Rank: '+getRank(getTotalXP()).title+'\n';
+  const blob=new Blob([text],{type:'text/plain'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url; a.download='ClientFile_'+state.student.name.replace(/\s+/g,'_')+'.txt';
+  a.click(); URL.revokeObjectURL(url);
+}
+
+// ══════════════════════════════════════════════════════════════
+//  RESTORE STATE
+// ══════════════════════════════════════════════════════════════
+function restoreState(){
+  SESSIONS.forEach(s=>{
+    s.exercises.forEach(ex=>{
+      const ans=state.answers[s.num]?.[ex.id]||{};
+      // Restore answer values in DOM
+      if(ex.type==='decision'){
+        const chosen=ans[0];
+        if(typeof chosen!=='undefined'&&state.checked[s.num]?.[ex.id]){
+          // Re-apply decision state
+          ex.options.forEach((_,i)=>{const b=document.getElementById('dec_'+s.num+'_'+ex.id+'_'+i); if(b) b.disabled=true;});
+          const cb=document.getElementById('dec_'+s.num+'_'+ex.id+'_'+chosen);
+          if(cb) cb.classList.add(ex.options[chosen].best?'chosen-best':'chosen-bad');
+          if(!ex.options[chosen].best){
+            const bi=ex.options.findIndex(o=>o.best);
+            const bb=document.getElementById('dec_'+s.num+'_'+ex.id+'_'+bi);
+            if(bb) bb.classList.add('reveal-best');
+          }
+          const fb=document.getElementById('decfb_'+s.num+'_'+ex.id);
+          if(fb){const o=ex.options[chosen];fb.className='dec-feedback show '+(o.best?'good':'bad');fb.innerHTML=(o.best?'✅ <b>Great decision!</b>':'❌ <b>Not the best choice.</b>')+' '+o.outcome;}
+        }
+      } else {
+        ex.items.forEach((it,i)=>{
+          const val=ans[i]||'';
+          if(!val) return;
+          if(ex.type==='radio-mc'){const r=document.querySelector('input[name="r_'+s.num+'_'+ex.id+'_'+i+'"][value="'+val+'"]'); if(r) r.checked=true;}
+          else if(ex.type==='true-false'){
+            const tb=document.getElementById('tf_'+s.num+'_'+ex.id+'_'+i+'_t');
+            const fb=document.getElementById('tf_'+s.num+'_'+ex.id+'_'+i+'_f');
+            if(tb) tb.className='tf-btn'+(val==='true'?' sel-t':'');
+            if(fb) fb.className='tf-btn'+(val==='false'?' sel-f':'');
+          } else {const el=document.getElementById(s.num+'_'+ex.id+'_'+i); if(el) el.value=val;}
+        });
+      }
+      // Re-apply check if already done
+      if(state.checked[s.num]?.[ex.id]){
+        if(isAutoEx(ex)&&ex.type!=='decision') checkExercise(s.num,ex.id,true);
+        else if(ex.type!=='decision'){
+          ex.items.forEach((_,i)=>{const el=document.getElementById(s.num+'_'+ex.id+'_'+i); if(el) el.disabled=true;});
+          document.getElementById('exblock_'+s.num+'_'+ex.id)?.classList.add('ex-done');
+          const chkBtn=document.getElementById('chk_'+s.num+'_'+ex.id); if(chkBtn) chkBtn.style.display='none';
+          const resEl=document.getElementById('res_'+s.num+'_'+ex.id); if(resEl){resEl.className='check-result saved'; resEl.textContent='📝 Saved — your teacher will grade this.';}
+        }
+      }
+    });
+    // Restore CF textarea
+    const cfEl=document.getElementById('cf_'+s.num);
+    if(cfEl) cfEl.value=state.clientFile[s.num]||'';
+    // Restore mission complete card
+    if(state.submitted[s.num]){
+      const mc=document.getElementById('mc-'+s.num);
+      if(mc){
+        mc.classList.add('show');
+        const sc=state.scores[s.num]||{lang:0,ps:0,maxLang:0,maxPs:0};
+        const mxp=(sc.lang||0)+(sc.ps||0);
+        const rank=getRank(getTotalXP());
+        document.getElementById('mc-xp-'+s.num).textContent='+'+mxp;
+        document.getElementById('mc-auto-'+s.num).textContent=mxp+'/'+((sc.maxLang||0)+(sc.maxPs||0));
+        document.getElementById('mc-tot-'+s.num).textContent=getTotalXP();
+        document.getElementById('mc-rico-'+s.num).textContent=rank.icon;
+        document.getElementById('mc-rname-'+s.num).textContent=rank.title;
+        if(document.getElementById('mc-sk-lang-'+s.num)) document.getElementById('mc-sk-lang-'+s.num).textContent='🧠 Lang: '+(sc.lang||0);
+        if(document.getElementById('mc-sk-ps-'+s.num)) document.getElementById('mc-sk-ps-'+s.num).textContent='🧩 PS: '+(sc.ps||0);
+      }
+      const btn=document.getElementById('sub-'+s.num); if(btn) btn.style.display='none';
+      const nxt=document.getElementById('nxt-'+s.num); if(nxt) nxt.classList.add('show');
+    }
+    updateSubmitButton(s.num);
+  });
+  updateSidebar();
+}
+
+// ══════════════════════════════════════════════════════════════
+//  BOOT
+// ══════════════════════════════════════════════════════════════
+// Reset mode: add ?reset to URL to clear your saved progress
+if(location.search.includes('reset')){
+  Object.keys(localStorage).filter(k=>k.startsWith('ukguide4_')).forEach(k=>localStorage.removeItem(k));
+  const url=location.href.replace(/[?&]reset[^&]*/,'').replace(/[?&]$/,'');
+  history.replaceState(null,'',url||location.pathname);
+  alert('✓ Progress cleared. You can now log in fresh.');
+}
+// Start at onboarding (default display:flex set in HTML)
+</script>
+</body>
+</html>
