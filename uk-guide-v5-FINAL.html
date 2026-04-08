@@ -1149,8 +1149,19 @@ function applyProgress(saved){
 
 function sendProgressToSheets(prog){
   if(!SHEETS_URL||SHEETS_URL==='YOUR_APPS_SCRIPT_URL_HERE') return;
-  fetch(SHEETS_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},
-    body:JSON.stringify({action:'saveProgress',email:state.student.email,...prog})}).catch(()=>{});
+
+  fetch(SHEETS_URL,{
+    method:'POST',
+    headers:{ 'Content-Type':'application/json' },
+    body:JSON.stringify({
+      action:'saveProgress',
+      email:state.student.email,
+      ...prog
+    })
+  })
+  .then(res=>res.json())
+  .then(d=>console.log('Progress OK',d))
+  .catch(err=>console.error('Progress ERROR',err));
 }
 
 function sendMissionToSheets(snum,rows){
@@ -1163,10 +1174,19 @@ function sendMissionToSheets(snum,rows){
     group:state.student.cls,date:state.student.date,session:snum,sessionTitle:s.title,
     scores:state.scores[snum],totalXP:getTotalXP(),rank:getRank(getTotalXP()).title,
     level:state.level,clientFile:state.clientFile[snum]||'',rows};
-  fetch(SHEETS_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},body:JSON.stringify(payload)})
-  .then(()=>{setStatus(snum,'sent','✓ Sent to teacher!');setTimeout(()=>setStatus(snum,''),4000);})
-  .catch(()=>{setStatus(snum,'error','Connection error.');});
-}
+  fetch(SHEETS_URL,{
+  method:'POST',
+  headers:{ 'Content-Type':'application/json' },
+  body:JSON.stringify(payload)
+})
+.then(res=>res.json())
+.then(()=>{
+  setStatus(snum,'sent','✓ Sent to teacher!');
+  setTimeout(()=>setStatus(snum,''),4000);
+})
+.catch(()=>{
+  setStatus(snum,'error','Connection error.');
+});
 function setStatus(snum,type,html=''){
   const el=document.getElementById('sendst-'+snum);
   if(!el) return;
