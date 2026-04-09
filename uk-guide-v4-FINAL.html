@@ -1367,6 +1367,16 @@ function getShuffledMatchOpts(snum,exid,opts){
   return SHUFFLE_CACHE[key];
 }
 
+// Returns shuffled array of original indices for decision options
+function getShuffledDecisionOpts(snum,exid,numOpts){
+  const key=snum+'_'+exid+'_decopts';
+  if(!SHUFFLE_CACHE[key]){
+    const seed=strHash(state.student.email+key);
+    SHUFFLE_CACHE[key]=seededShuffle([...Array(numOpts).keys()],seed);
+  }
+  return SHUFFLE_CACHE[key];
+}
+
 function renderAllSessions(){
   document.getElementById('content-area').innerHTML=SESSIONS.map(renderSession).join('');
 }
@@ -1472,13 +1482,14 @@ function renderExercise(snum,ex,num){
       '<textarea class="open-inp" id="'+snum+'_'+ex.id+'_'+i+'" rows="3" placeholder="Write your answer here…" oninput="saveAns('+snum+',\''+ex.id+'\','+i+',this.value)"></textarea></div>'
     ).join('');
   } else if(ex.type==='decision'){
+    const dIdx=getShuffledDecisionOpts(snum,ex.id,ex.options.length);
     body='<div class="decision-scene">'+
       '<div class="char-bubble"><div class="char-avatar">'+ex.charEmoji+'</div>'+
       '<div class="char-info"><div class="char-name">'+ex.charName+'</div>'+
       '<div class="char-text">'+ex.scenario+'</div></div></div>'+
-      '<div class="dec-options">'+ex.options.map((o,oi)=>
-        '<button class="dec-btn" id="dec_'+snum+'_'+ex.id+'_'+oi+'" onclick="chooseOption('+snum+',\''+ex.id+'\','+oi+')">'+
-        '<span class="dec-letter">'+String.fromCharCode(65+oi)+'</span><span>'+o.text+'</span></button>'
+      '<div class="dec-options">'+dIdx.map((origIdx,dispPos)=>
+        '<button class="dec-btn" id="dec_'+snum+'_'+ex.id+'_'+origIdx+'" onclick="chooseOption('+snum+',\''+ex.id+'\','+origIdx+')">'+
+        '<span class="dec-letter">'+String.fromCharCode(65+dispPos)+'</span><span>'+ex.options[origIdx].text+'</span></button>'
       ).join('')+'</div>'+
       '<div class="dec-feedback" id="decfb_'+snum+'_'+ex.id+'"></div>'+
       '</div>';
