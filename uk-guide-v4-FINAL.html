@@ -1033,7 +1033,54 @@ function getRank(xp){ return [...RANKS].reverse().find(r=>xp>=r.min)||RANKS[0]; 
 function removeAccents(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
 
 // ══════════════════════════════════════════════════════════════
-//  ONBOARDING
+//  LLISTA D'ALUMNES VÀLIDS
+// ══════════════════════════════════════════════════════════════
+const VALID_EMAILS = new Set([
+  // 4t ESO A
+  'aguilar.marta@institutmatadepera.cat',
+  'boix.daniela@institutmatadepera.cat',
+  'brana.nora@institutmatadepera.cat',
+  'caparros.lia@institutmatadepera.cat',
+  'espinosa.marc@institutmatadepera.cat',
+  'fernandez.judith@institutmatadepera.cat',
+  'gonzalez.pau@institutmatadepera.cat',
+  'gonzalez.bruno@institutmatadepera.cat',
+  'grau.nuria@institutmatadepera.cat',
+  'ligero.david@institutmatadepera.cat',
+  'macias.carla@institutmatadepera.cat',
+  'martin.ariadna@institutmatadepera.cat',
+  'oliveres.arlet@institutmatadepera.cat',
+  'ortuno.arian@institutmatadepera.cat',
+  'prat.biel@institutmatadepera.cat',
+  'prat.aran@institutmatadepera.cat',
+  'rodriguez.genis@institutmatadepera.cat',
+  'rubia.lucas@institutmatadepera.cat',
+  'sanchez.gabriel@institutmatadepera.cat',
+  // 4t ESO B
+  'asensio.carla@institutmatadepera.cat',
+  'bernabeu.joan@institutmatadepera.cat',
+  'castillo.roger@institutmatadepera.cat',
+  'cusido.jan@institutmatadepera.cat',
+  'ferrero.marina@institutmatadepera.cat',
+  'garcia.marti@institutmatadepera.cat',
+  'gil.pau@institutmatadepera.cat',
+  'girol.marc@institutmatadepera.cat',
+  'gomez.bernat@institutmatadepera.cat',
+  'iglesias.nil@institutmatadepera.cat',
+  'latorre.lluis@institutmatadepera.cat',
+  'lopez.africa@institutmatadepera.cat',
+  'malgosa.martina@institutmatadepera.cat',
+  'martin.marc@institutmatadepera.cat',
+  'martin.bet@institutmatadepera.cat',
+  'milla.mylene@institutmatadepera.cat',
+  'peiro.oriol@institutmatadepera.cat',
+  'riba.juli@institutmatadepera.cat',
+  'sociats.roc@institutmatadepera.cat',
+  'vancells.nora@institutmatadepera.cat',
+  'vergara.marc@institutmatadepera.cat',
+  // Professor (per fer proves)
+  'nestor.calbet@institutmatadepera.cat',
+]);
 // ══════════════════════════════════════════════════════════════
 let obSlide=1; const OB_TOTAL=4;
 function obNext(){ if(obSlide>=OB_TOTAL) return; obGo(obSlide+1); }
@@ -1084,7 +1131,12 @@ async function tryLogin(){
   const e=document.getElementById('inp-email').value.trim().toLowerCase();
   if(!n){alert('Please enter your full name.');return;}
   if(!e||!e.endsWith('@institutmatadepera.cat')){alert('Please use your school email (@institutmatadepera.cat).');return;}
-  state.student.name=n; state.student.email=e; state.student.cls='';
+  if(!VALID_EMAILS.has(e)){
+    const warn=document.getElementById('email-warn');
+    warn.style.display='block';
+    warn.textContent='This email is not on the class list. Please check you have typed it correctly.';
+    return;
+  }  state.student.name=n; state.student.email=e; state.student.cls='';
   state.student.date=new Date().toLocaleDateString('en-GB');
   document.getElementById('chip-name').textContent=n;
   const loading=document.getElementById('login-loading');
