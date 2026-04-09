@@ -446,11 +446,6 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
     <div class="field"><label>School Email</label>
       <input id="inp-email" type="email" placeholder="cognom.nom@institutmatadepera.cat" autocomplete="off" oninput="validateEmail()">
       <div class="email-warn" id="email-warn"></div></div>
-    <div class="field"><label>Class / Group</label>
-      <select id="inp-class">
-        <option value="">– Select your group –</option>
-        <option>4t ESO A</option><option>4t ESO B</option>
-      </select></div>
     <button class="btn-start" onclick="tryLogin()">⚔️ Begin Training</button>
     <div class="login-loading" id="login-loading"><span class="spinner" style="display:inline-block"></span> Loading your progress…</div>
   </div>
@@ -472,7 +467,6 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
     <div class="topbar-logo">🇬🇧 UK Guide Agency</div>
     <div class="topbar-right">
       <div class="chip">Guide: <b id="chip-name"></b></div>
-      <div class="chip">Group: <b id="chip-class"></b></div>
       <div class="xp-chip">
         <span class="xri" id="tb-rank-ico">🎫</span>
         <span class="xrl" id="tb-rank-lbl">Rookie</span>
@@ -1088,14 +1082,11 @@ function validateEmail(){
 async function tryLogin(){
   const n=document.getElementById('inp-name').value.trim();
   const e=document.getElementById('inp-email').value.trim().toLowerCase();
-  const c=document.getElementById('inp-class').value;
   if(!n){alert('Please enter your full name.');return;}
   if(!e||!e.endsWith('@institutmatadepera.cat')){alert('Please use your school email (@institutmatadepera.cat).');return;}
-  if(!c){alert('Please select your class group.');return;}
-  state.student.name=n; state.student.email=e; state.student.cls=c;
+  state.student.name=n; state.student.email=e; state.student.cls='';
   state.student.date=new Date().toLocaleDateString('en-GB');
   document.getElementById('chip-name').textContent=n;
-  document.getElementById('chip-class').textContent=c;
   const loading=document.getElementById('login-loading');
   loading.style.display='block';
   document.querySelector('.btn-start').disabled=true;
@@ -1140,6 +1131,7 @@ async function loadProgress(email){
 
 function applyProgress(saved){
   if(saved.level) state.level=saved.level;
+  if(saved.group) state.student.cls=saved.group;
   if(saved.answers) Object.keys(saved.answers).forEach(k=>{ state.answers[k]=saved.answers[k]||{}; });
   if(saved.checked) Object.keys(saved.checked).forEach(k=>{ state.checked[k]=saved.checked[k]||{}; });
   if(saved.submitted) Object.keys(saved.submitted).forEach(k=>{ state.submitted[k]=saved.submitted[k]; });
