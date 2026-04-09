@@ -1384,10 +1384,16 @@ function renderExercise(snum,ex,num){
     ).join('')+'</table>';
   } else if(ex.type==='sel-blanks'){
     body='<div class="wbank">'+ex.bank.map(w=>'<span class="wchip">'+w+'</span>').join('')+'</div>';
+    const sBankKey=snum+'_'+ex.id+'_sbank';
+    if(!SHUFFLE_CACHE[sBankKey]){
+      const seed=strHash(state.student.email+sBankKey);
+      SHUFFLE_CACHE[sBankKey]=seededShuffle([...ex.bank],seed);
+    }
+    const sBank=SHUFFLE_CACHE[sBankKey];
     body+=ex.items.map((it,i)=>'<div class="qitem"><div class="fsent"><span style="color:var(--muted);font-weight:600">'+(i+1)+'.</span>'+
       (it.before?'<span>'+it.before+'</span>':'')+
       '<select class="ans-sel" id="'+snum+'_'+ex.id+'_'+i+'" onchange="saveAns('+snum+',\''+ex.id+'\','+i+',this.value)">'+
-      '<option value="">___</option>'+ex.bank.map(w=>'<option value="'+w+'">'+w+'</option>').join('')+
+      '<option value="">___</option>'+sBank.map(w=>'<option value="'+w+'">'+w+'</option>').join('')+
       '</select>'+(it.after?'<span>'+it.after+'</span>':'')+
       '<span id="fb_'+snum+'_'+ex.id+'_'+i+'"></span></div></div>'
     ).join('');
