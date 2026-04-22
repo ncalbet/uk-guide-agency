@@ -1206,7 +1206,9 @@ function sendMissionToSheets(snum,rows){
   const payload={action:'saveMission',email:state.student.email,student:state.student.name,
     group:state.student.cls,date:state.student.date,session:snum,sessionTitle:s.title,
     scores:state.scores[snum],totalXP:getTotalXP(),rank:getRank(getTotalXP()).title,
-    level:state.level,clientFile:state.clientFile[snum]||'',rows};
+    level:state.level,clientFile:state.clientFile,
+    answers:state.answers,checked:state.checked,submitted:state.submitted,
+    rows};
   fetch(SHEETS_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},body:JSON.stringify(payload)})
   .then(()=>{setStatus(snum,'sent','✓ Sent to teacher!');setTimeout(()=>setStatus(snum,''),4000);})
   .catch(()=>{setStatus(snum,'error','Connection error.');});
